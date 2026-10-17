@@ -25,6 +25,26 @@ a set of rules, and a handful of hooks — that makes that practical for a real 
 - **`TEMPLATE.md`** — how to fork this into your own instance, and what to strip.
 - **`INBOX.md`** — the agent → owner handoff board.
 
+## Getting started (install in ~20 minutes)
+
+This repo **is** the template. The full step-by-step is [[05 - KITS/05.04 - install/index|Install JDAK]]; the
+short version:
+
+1. **Obsidian** (desktop + mobile) + **Dropbox** (desktop + mobile).
+2. **Clone/fork** the vault to `$WS/Vault`; connect a **private GitHub repo**.
+3. **Wire the sync** — `bin/vault-sync.sh` (two-way `rclone bisync`, preserve-both) plus the
+   **event-driven watcher** `bin/vault-sync-watch.py` + its systemd *user* unit; keep a 15-min cron as the
+   backstop. Edit one line in `bin/vault-paths.sh` when the vault moves.
+4. **Obsidian plugins** — **Remotely Save** (Dropbox → `Apps/remotely-save/jdak-stack`) and **Templater**
+   (*Folder Templates*: `00 - INBOX/00.02 - intake` → `05 - KITS/05.02 - templates/intake.md`).
+5. **Vendor the agent** — `AGENTS/SOUL/IDENTITY/USER/MEMORY/TOOLS.md` live in **`99 - META/`** and are
+   symlinked into the workspace; register MCP servers + secrets; symlink `07 - SKILLS/*` into `skills/`.
+6. **Verify** — `vault-sync.sh` exits 0, the watcher is active, and a test note reaches your phone.
+
+> **Why `99 - META`:** the vault is the source of truth. The agent's instruction files, the management
+> skills (`07.01–07.09`), and the sync scripts all live *inside* it, so they sync and version together.
+> `TOOLS.md` is the local cheat sheet: sync paths, secret pointers, MCP names, machine specifics.
+
 ## The problems it solves
 
 1. **File spray.** "Save this for later," and durable files get strewn across the
@@ -139,7 +159,7 @@ there. Full rules — including how the agent *grows* the structure — are in `
 
 JDAK ships as a **template**. Everything shareable lives in the *base*; everything
 personal lives in the *instance*. See **`TEMPLATE.md`** for the split and the 10-minute
-instantiate procedure, and **`05 - KITS/05.08 - install/`** for the full, concrete
+instantiate procedure, and **`05 - KITS/05.04 - install/`** for the full, concrete
 install (vault + sync + agent wiring) — that's the file to follow to get this onto your setup.
 
 ## Operating rules

@@ -42,7 +42,7 @@ referenced vault-wide) · `07 - SKILLS` (numbering *is* the system/personal sign
 
 ## Output
 → renumbered shelves · updated references · refreshed `index.md` · synced.
-(Rules live in `05 - KITS/05.06 - compact.md`; this macro is the owner-facing trigger for the same op.)
+(Rules live in `05 - KITS/05.08 - compact.md`; this macro is the owner-facing trigger for the same op.)
 
 ## Notes
 - Same operation as the **`compact`** kit — `05.08` is the spec, this is the phrase you say.

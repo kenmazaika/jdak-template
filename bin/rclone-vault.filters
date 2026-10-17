@@ -1,0 +1,32 @@
+# rclone filter for Vault ⇄ Dropbox:Apps/remotely-save/jdak-stack
+# First match wins. Excluded trees first so they beat the allowlist below.
+# Trimmed 2026-10-13: Dropbox account is 2 GB — keep the mirror note-sized; drop heavy asset/media trees.
+
+# --- never sync: git internals, caches, databases, big asset/media trees ---
+- .git/**
+- **/.git/**
+- **/.cache/**
+- **/__pycache__/**
+- **/*.duckdb
+- **/assets/**
+- **/masthead*/**
+- **/refs/**
+- 09 - FLEETING/09.01 - raw/session-turns/**
+- 09 - FLEETING/09.01 - raw/content/**
+- 10 - ARCHIVE/**
+
+# --- allowlist: notes, small images, csv (no PDFs — too heavy for the 2 GB mirror) ---
++ .gitkeep
++ *.md
++ *.txt
++ *.html
++ *.png
++ *.jpg
++ *.jpeg
++ *.webp
++ *.gif
++ *.svg
++ *.csv
+
+# --- drop everything else (pdf/py/json/logs/media/etc.) ---
+- **

@@ -68,7 +68,7 @@ source of truth.)
 - System skills (numbered) — generic, reusable.
 - Personal skills (un-numbered) — instance-specific.
 - Workflow prompts (e.g. the dictation-processing prompt).
-- Skill pipelines — the multi-phase routines that chain other skills (see `05 - KITS/05.05 - skill-handoffs.md`).
+- Skill pipelines — the multi-phase routines that chain other skills (see `05 - KITS/05.07 - skill-handoffs.md`).
 
 ## Notes
 

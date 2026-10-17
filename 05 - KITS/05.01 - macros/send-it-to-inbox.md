@@ -25,7 +25,7 @@ in the vault, so the owner has everything in Obsidian and can just act there.
 ## Steps
 
 1. **Read** the recent conversation; identify the **artifact** and the **decision** the owner must make.
-2. **Load the playbook:** `05 - KITS/05.07 - inbox-message-playbook.md` — follow it exactly.
+2. **Load the playbook:** `05 - KITS/05.09 - inbox-message-playbook.md` — follow it exactly.
 3. **Decide the action set (case by case).** Ask: *what are the few things the owner could do here, and
    which are best?* Those become the checkboxes. Don't reuse a fixed set.
 4. **Write the handoff** → `00 - INBOX/00.01 - handoffs/<date>-<topic>.md` (from the `handoff` template):

@@ -40,7 +40,7 @@ Every `00.01` note is built so the owner can act **without opening anything else
 
 Frontmatter carries `loop:` (the owning loop, or `—`) and `action: pending | done`.
 
-**How to write one:** follow the **Inbox-message playbook** (`05 - KITS/05.07 - inbox-message-playbook.md`); the **`send it to inbox`** macro composes one from the recent messages.
+**How to write one:** follow the **Inbox-message playbook** (`05 - KITS/05.09 - inbox-message-playbook.md`); the **`send it to inbox`** macro composes one from the recent messages.
 
 ## The action sweep (owner → agent, back) — processes **EVERY** handoff
 
@@ -53,7 +53,7 @@ It processes **every** `00.01` note — **not only loop-owned ones**:
    - **Plain handoff** (`loop: —` or missing) → **do what the checked box + comments ask**, generically.
      No loop needed. Route any durable output to its numbered home.
 3. Perform it → flip `action: pending` → `done` → log to the owning loop's `ledger.md` (and
-   `05 - KITS/05.09 - feedback/feedback.md` for a **reason** — *collect, don't promote to a rule yet*) **and** the day's
+   `05 - KITS/05.05 - feedback/feedback.md` for a **reason** — *collect, don't promote to a rule yet*) **and** the day's
    **daily note** → **move the note to `00.04 - outbox/`** → refresh `INBOX.md`.
 
 **Tickets (`00.03`).** A note there with a checked box is a running ticket — **Execute** → reverse-prompt

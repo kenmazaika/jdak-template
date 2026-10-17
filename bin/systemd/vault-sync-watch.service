@@ -1,0 +1,16 @@
+[Unit]
+Description=Vault auto-sync watcher (local change + Dropbox longpoll)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/matthew/.openclaw/workspace/bin/vault-sync-watch.py
+Environment=JDAK_VAULT_ROOT=/home/matthew/.openclaw/workspace/Vault
+Environment=JDAK_WORKSPACE=/home/matthew/.openclaw/workspace
+Restart=always
+RestartSec=10
+Nice=10
+
+[Install]
+WantedBy=default.target

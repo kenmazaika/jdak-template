@@ -78,7 +78,7 @@ is generic. The **checked box is the owner's approval** — the sweep acts on it
 | `06.03 - research-engine` | Review the goals → frame **one** high-leverage question + hypothesis → research it | weekly / manual | `06.03/questions/` + a durable `03 - PERMANENT` page |
 | `06.04 - cold-email` | Source → enrich → Airtable → Instantly: the lead engine (declares the cold-email crons) | continuous | `01.35` + Airtable/Instantly |
 | `06.05 - blog-idea` | Queue **ONE** new engineering-blog idea (topic + angle + why) via SEO + agent-traffic + trend research; rubric-gated | daily | `04.08 - blog-content/idea-backlog.md` + inbox |
-| `06.06 - feedback-mining` | Batch the feedback corpus → propose the top ≤3 rule changes (collect, never auto-promote) | weekly | `05 - KITS/05.09 - feedback/` (+ `rules.md`) |
+| `06.06 - feedback-mining` | Batch the feedback corpus → propose the top ≤3 rule changes (collect, never auto-promote) | weekly | `05 - KITS/05.05 - feedback/` (+ `rules.md`) |
 | `06.07 - forge-draft` | Turn a **locked** idea (from `06.05`) into a forged draft against a **written 5-check rubric** — idea gate → deterministic forge (fresh adversarial critic → bounded revise → honest block) → verdict gate | on-request (ticket / cron) | `08 - PRODUCTION/drafts/` (the draft) + `06.07/runs/` |
 
 **Building a new loop?** Use **Loop Studio** (`05 - KITS/05.01 - macros/loop-studio.md` · macro `05 - KITS/05.01 - macros/loop-studio.md`) — it scaffolds a loop from a plain-text brief.

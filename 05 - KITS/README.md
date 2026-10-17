@@ -39,7 +39,7 @@ Kits are deliberately *more verbose* than skills — they carry the structure, n
 ## Notes
 
 - **Macro vs kit:** a *macro* (`05.01`) is owner-facing and short — a phrase → a few steps. A *kit* doc
-  (e.g. `05.04 - qball`) is the longer doctrine. Both are "a named routine"; **promote a macro to a skill**
+  (e.g. `05.06 - qball`) is the longer doctrine. Both are "a named routine"; **promote a macro to a skill**
   when it grows real logic, inputs, or gets reused across loops.
 - Scripts here are the *vault's* tooling, not general-purpose code.
 - Kit **docs** stay generic (base); any state is instance data.

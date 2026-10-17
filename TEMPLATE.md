@@ -44,14 +44,14 @@ empty) the instance.
 ## Instantiate (10-minute procedure)
 
 1. **Copy the base.** Clone/copy this folder. Delete `.git` and re-`init` for a fresh history.
-2. **Name it.** Set the vault name in `bin/jdak-sync.sh` (`SRC` / `DST`) and, optionally,
+2. **Name it.** Set the vault name in `bin/vault-sync.sh` (`SRC` / `DST`) and, optionally,
    retitle `README.md`.
 3. **Empty the instance.** Clear `01 - PROJECTS/01.02 - qballs/*`, `03 - PERMANENT/*`, `04 - RESOURCES/*`,
    `07 - SKILLS/*`, `08 - PRODUCTION/*`, `09 - FLEETING/*`, `10 - ARCHIVE/*`, and the state files in
    `99 - META/`. Reset `INBOX.md`, `BALLS.md`, `log.md`.
 4. **Wire Obsidian.** Point the *Templates* plugin at `05 - KITS/05.02 - templates`; the
    *Daily notes* plugin at `02 - AREAS/02.04 - daily-notes`, with the `daily-note` template.
-5. **Wire sync.** Configure an rclone remote + `bin/jdak-sync.sh` + a cron (see README
+5. **Wire sync.** Configure an rclone remote + `bin/vault-sync.sh` + a cron (see README
    *Sync*). Point mobile *Remotely Save* at the same Dropbox folder.
 6. **Add your first project** (`01 - PROJECTS/01.02 - qballs/01.01 - <slug>/` from `project.md`) and
    register it in `BALLS.md`.
@@ -61,4 +61,4 @@ empty) the instance.
 - The category folders themselves — the structure *is* the value.
 - `SCHEMA.md` and the growth protocol — that's what keeps it agent-growable.
 - The per-category `README.md` files — they're the self-describing map.
-- `bin/` (`jdak-sync.sh` + filters) if you want phone sync.
+- `bin/` (`vault-sync.sh`, `vault-sync-watch.py` + filters) if you want phone sync.
