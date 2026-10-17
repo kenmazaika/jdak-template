@@ -13,7 +13,7 @@ tags: [journal]
 
 **Today:** <the one thing that mattered — one line>
 
-## For Ken
+## For the owner
 _Skimmable, outcome-only. Vault Voice Guide. Never restate the system log._
 
 **Shipped**

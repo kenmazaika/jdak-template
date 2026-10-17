@@ -37,7 +37,7 @@ Canonical ball root: **`Vault/01 - PROJECTS/`** (`~/wiki/balls` and `workspace/b
 - **No match → create a ball** at `Vault/01 - PROJECTS/01.02 - qballs/<slug>/`:
   ```
   BALL.md        # frontmatter: name, type: qball, status: active, owner, created, last_thrown, next_action
-                 # + "One-screen read", "Open decisions (need Ken)", "How to resume"
+                 # + "One-screen read", "Open decisions (need the owner)", "How to resume"
   decisions.md   # the WHY — read first
   LINEAGE.md     # prompts/models/commands per version
   receipts/      # proof of what ran

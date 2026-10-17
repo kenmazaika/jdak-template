@@ -11,7 +11,7 @@ working loop. Doctrine: `05 - KITS/05.01 - macros/loop-studio.md`. The phrase is
 
 ## When to use
 
-- Ken says **"Loop Studio"**, "build a loop", "new loop <topic>", or describes a recurring job to wire.
+- the owner says **"Loop Studio"**, "build a loop", "new loop <topic>", or describes a recurring job to wire.
 
 ## What it assembles (the mechanisms already exist)
 

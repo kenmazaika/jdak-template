@@ -21,7 +21,7 @@ wire it to an agent (OpenClaw, Hermes, …). Two audiences: **the human** (A–C
 
 - **Obsidian** (desktop + mobile).
 - **Dropbox** (the sync relay) — desktop + mobile apps.
-- `git` + a **private** GitHub repo for backup (this template is `kenmazaika/JDAK-vault`).
+- `git` + a **private** GitHub repo for backup (this template is `your-org/JDAK-vault`).
 - `rclone` (`~/.local/bin/rclone`) with a `dropbox` remote.
 - **Python 3** (stdlib only — no pip packages needed).
 - An agent (OpenClaw) with a workspace and a `skills/` dir.

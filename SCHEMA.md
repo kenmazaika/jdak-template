@@ -269,7 +269,7 @@ triage digest. Bump `updated:` on every edit.
 
 ## 11. History
 
-- **2026-08-29** — ported from the Hermes wiki (`/home/matthew/wiki`); 4-layer model,
+- **2026-08-29** — ported from the Hermes wiki (`$HOME/wiki`); 4-layer model,
   `kind` axis, controlled `status`.
 - **2026-09-14** — added `authority` (retrieve/gate); guidance gated under `03.07`; ball
   root consolidated to `Vault/balls/`.
@@ -288,7 +288,7 @@ triage digest. Bump `updated:` on every edit.
   (`04.05 cold-email` … `04.09 agent-tooling`) + `04.02 - dictations`; added the `serves:` /
   `why:` / `signal:` / `review_by:` key and the **SIGNAL** rubric (see
   `04 - RESOURCES/README.md`); dictations moved out of `09 - FLEETING` (so they sync) with balls
-  symlinking in; `04.02 - artifacts` split (Ken-authored posts →
+  symlinking in; `04.02 - artifacts` split (owner-authored posts →
   `08 - PRODUCTION/drafts/legacy-artifacts/`, résumé + reddit twins archived).
   Proposal: `04.03 - proposals/resources-handling-2026-10-12.md`.
 - **2026-10-12 (later still)** — **Resources v2** (owner's ask): `04.01` is now the **explicit-capture

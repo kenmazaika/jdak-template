@@ -13,7 +13,7 @@ Weekly, once. This replaces unread cron output with a single gated digest.
 2. **Dedupe** — flag near-duplicate captures and propose merges.
 3. **Guidance inbox** — review `Vault/guidance/inbox/`. For each item show source / date / scope / confidence / review-by and ask: promote, reject, or expire. Nothing is promoted automatically.
 4. **Registry freshness** — regenerate or verify `BALLS.md` from ball frontmatter; flag balls stale more than 30 days; fix broken paths.
-5. **One digest** — a single one-screen message. Ken approves promotions; unapproved items expire in 30 days.
+5. **One digest** — a single one-screen message. the owner approves promotions; unapproved items expire in 30 days.
 
 ## Hard rules
 - Never bulk-generate research. Never auto-promote to L0 (always-loaded) or L4 (guidance).

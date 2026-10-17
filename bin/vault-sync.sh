@@ -13,15 +13,15 @@
 # Invoked by cron every 15 min. Paths come from bin/vault-paths.sh (single source
 # of truth) and stay env-overridable for testing.
 set -uo pipefail
-export PATH=/home/matthew/.local/bin:/home/matthew/.hermes/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=$HOME/.local/bin:$HOME/.hermes/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # Load the single source of truth for vault paths (edit bin/vault-paths.sh when the vault moves).
 [ -r "$SCRIPT_DIR/vault-paths.sh" ] && . "$SCRIPT_DIR/vault-paths.sh"
 
-RCLONE=${RCLONE:-/home/matthew/.local/bin/rclone}
-CFG=${CFG:-/home/matthew/.config/rclone/rclone.conf}
-WS=${WS:-${JDAK_WORKSPACE:-/home/matthew/.openclaw/workspace}}
+RCLONE=${RCLONE:-$HOME/.local/bin/rclone}
+CFG=${CFG:-$HOME/.config/rclone/rclone.conf}
+WS=${WS:-${JDAK_WORKSPACE:-$HOME/.openclaw/workspace}}
 SRC=${SRC:-${JDAK_VAULT_ROOT:-$WS/Vault}}
 DST=${DST:-${JDAK_DROPBOX_DEST:-dropbox:Apps/remotely-save/jdak-stack}}
 FILT=${FILT:-$SCRIPT_DIR/rclone-vault.filters}
@@ -29,7 +29,7 @@ LOG=${LOG:-$WS/logs/jdak-bisync.log}
 STATE=${STATE:-$WS/logs/vault-sync-state.json}
 ALERT=${ALERT:-$WS/logs/vault-sync-alert.json}
 REPORT=${REPORT:-$WS/logs/vault-sync-report.json}
-STATEDIR=${STATEDIR:-/home/matthew/.local/state/vault-sync}
+STATEDIR=${STATEDIR:-$HOME/.local/state/vault-sync}
 BACKUP1=${BACKUP1:-$STATEDIR/backup-path1}
 REVIEW=${REVIEW:-$STATEDIR/review}
 MERGE=${MERGE:-$SCRIPT_DIR/vault-conflict-merge.py}
@@ -161,7 +161,7 @@ fi
 # --- 5. kick the inbox/ticket sweep ON SYNC when owner action is waiting ---
 # A ticked box / a convert-to-ticket should run as soon as the change lands, not on the next poll.
 SWEEP_ID=${SWEEP_ID:-cf2d5164-58ba-4c6f-a0cf-7aa731066d11}
-OC=${OC:-/home/matthew/.local/bin/openclaw}
+OC=${OC:-$HOME/.local/bin/openclaw}
 if [ "$rc" -eq 0 ] && [ -x "$OC" ] && [ -x "$SCRIPT_DIR/inbox-action-check.sh" ] \
    && [ -n "$(bash "$SCRIPT_DIR/inbox-action-check.sh" 2>/dev/null)" ]; then
   running=$("$PY" - "$OC" "$SWEEP_ID" <<'PYEOF'

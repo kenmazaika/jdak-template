@@ -74,7 +74,7 @@ is generic. The **checked box is the owner's approval** — the sweep acts on it
 | Loop | What it does | Cadence | Outputs to |
 |---|---|---|---|
 | `06.01 - distribution-research` | Scout new places to distribute the blog; promote one new channel | daily | `04.07 - distribution/` + inbox |
-| `06.02 - publish-blog` | Produce ONE new `publish.kenmazaika.com` post that teaches Ken something new; dedupe while a draft is pending; log accept/reject + reason | daily | `08 - PRODUCTION/drafts/` (**the draft**) + inbox |
+| `06.02 - publish-blog` | Produce ONE new `your-publish-blog` post that teaches the owner something new; dedupe while a draft is pending; log accept/reject + reason | daily | `08 - PRODUCTION/drafts/` (**the draft**) + inbox |
 | `06.03 - research-engine` | Review the goals → frame **one** high-leverage question + hypothesis → research it | weekly / manual | `06.03/questions/` + a durable `03 - PERMANENT` page |
 | `06.04 - cold-email` | Source → enrich → Airtable → Instantly: the lead engine (declares the cold-email crons) | continuous | `01.35` + Airtable/Instantly |
 | `06.05 - blog-idea` | Queue **ONE** new engineering-blog idea (topic + angle + why) via SEO + agent-traffic + trend research; rubric-gated | daily | `04.08 - blog-content/idea-backlog.md` + inbox |

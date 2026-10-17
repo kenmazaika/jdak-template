@@ -9,7 +9,7 @@
 set -uo pipefail
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 [ -r "$SCRIPT_DIR/vault-paths.sh" ] && . "$SCRIPT_DIR/vault-paths.sh"
-V="${JDAK_VAULT_ROOT:-/home/matthew/.openclaw/workspace/Vault}"
+V="${JDAK_VAULT_ROOT:-$HOME/.openclaw/workspace/Vault}"
 H="${JDAK_INBOX_HANDOFFS:-$V/00 - INBOX/00.01 - handoffs}"
 I="$V/00 - INBOX/00.02 - intake"
 T="$V/00 - INBOX/00.03 - tickets"

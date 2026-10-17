@@ -46,7 +46,7 @@ in the vault, so the owner has everything in Obsidian and can just act there.
 > **Summary:** ready-to-publish draft *"<title>"* — accept or reject.
 > **Source:** [[08 - PRODUCTION/drafts/<slug>/<slug>|the draft]]
 > **Your action:** `[ ] ✅ Accept & publish` · `[ ] 🛑 Reject` · `[ ] ✏️ Reject + reason`
-> **Suggested actions (best takeaways):** ✅ accept — the lesson clears the new-to-Ken gate; the only
+> **Suggested actions (best takeaways):** ✅ accept — the lesson clears the new-to-the owner gate; the only
 > soft spot is the opening anecdote.
 
 ## Notes
