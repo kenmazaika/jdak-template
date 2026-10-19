@@ -1,7 +1,7 @@
 ---
 title: Templates
 created: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-17
 type: schema
 kind: fact
 status: active
@@ -25,6 +25,7 @@ frontmatter stays consistent (this is what keeps the vault agent-growable).
 |---|---|
 | `daily-note.md` | The daily log (`02.04`) |
 | `handoff.md` | An agent → owner handoff (`00.01`) |
+| `decision-card.md` | An agent → owner **decision card** (`00.01`, `type: decision-card`) — a pick-from-a-set with the options and their payloads inline. **The one to use whenever the ask is "pick which of these"** (2+ discrete options). |
 | `ticket.md` | A long-running ticket (`00.03`) |
 | `capture.md` | A raw capture (routes via Intake / `04.01 - captures`) |
 | `permanent-note.md` | A distilled note (`03 - PERMANENT/03.03–03.06`) |

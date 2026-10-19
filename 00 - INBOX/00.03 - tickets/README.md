@@ -1,7 +1,7 @@
 ---
 title: Tickets
 created: 2026-10-15
-updated: 2026-10-16
+updated: 2026-10-17
 type: schema
 kind: fact
 status: active
@@ -25,6 +25,7 @@ folder — the baton you hand the agent. It stays alive across many rounds, and 
 | Folder | Direction | Shape | Lifespan |
 |---|---|---|---|
 | Handoff (`00.01`) | agent → owner | one decision, one screen | one rule-on, then out |
+| Decision card (`00.01`) | agent → owner | one decision + its option set, payloads inline | one execute, then out |
 | Intake (`00.02`) | owner → agent | one item, routed by a box | one routing |
 | **Ticket (`00.03`)** | **owner → agent, round-trip** | **a conversation, newest-first** | **many rounds, until closed** |
 | Outbox (`00.04`) | done → out | processed notes | terminal |
