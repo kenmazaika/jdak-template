@@ -93,9 +93,26 @@ with `status: blocked` + the exact blocker. Do not improvise a different PR.
    criterion, and the evidence. Do not open a PR.
 4. If it passes, push the branch and open the PR:
    - **Title:** a plain, descriptive summary — what changed, not why it matters.
-   - **Body:** 2–4 short paragraphs or bullets: what changed, why, how it was verified. Write like a
-     normal engineer, not a launch post. No emoji headers, no "comprehensive", no filler.
-   - End with one line: `Created by Felix 👾`.
+   - **Body:** use this exact three-part shape. It must be skimmable **without opening the code**:
+
+     ```markdown
+     ## Problem solving
+     One short paragraph, plain language: what was broken or missing, and why it mattered.
+
+     ## What I specifically did
+     - 3–5 bullets, one concrete change each, in reading order.
+     - Name a file only when it helps the reader find the change.
+     - No background essay; no restating the title.
+
+     ## Verified
+     One line or a few bullets: the command(s) run and the result.
+
+     Created by Felix 👾
+     ```
+
+   - Write like a normal engineer handing work to a teammate — not a launch post. No emoji headers,
+     no "comprehensive", no filler. If a reader has to open the diff to understand the *what* or the
+     *why*, the body is not done.
    - Target the loop's default branch. Never merge.
 5. Write `03-validation.md`: verdict, criteria table, commands + results, PR URL.
 6. Append a `ledger.md` row: date · category · idea · PR · verdict.
