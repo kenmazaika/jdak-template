@@ -1,7 +1,7 @@
 ---
 title: JDAK Schema
 created: 2026-08-29
-updated: 2026-10-11
+updated: 2026-10-17
 type: schema
 kind: fact
 status: active
@@ -113,7 +113,7 @@ title: Page Title
 created: YYYY-MM-DD
 updated: YYYY-MM-DD        # bump on every edit
 type: entity | concept | comparison | question | goal | area | reference | artifact
-      | project | capture | schema | log | index
+      | project | capture | schema | log | index | decision-card
 kind: fact | opinion | idea
 status: seed | active | complete | archived
 authority: authoritative | guidance      # default authoritative
@@ -226,6 +226,8 @@ irreversible (deleting anything not obviously transient), or when **two items bo
 ### Inbox (`00 - INBOX/`) — the agent → owner handoff surface + capture queue
 1. **Agent → owner:** post handoffs in `00.01 - handoffs/` and keep the live board `INBOX.md`
    current — what the owner must **decide / review / know** (template `05 - KITS/05.02 - templates/handoff.md`).
+   A handoff whose ask is *"pick which of these"* ships as a **decision card** instead — same folder, same
+   sweep, `type: decision-card` (template `05 - KITS/05.02 - templates/decision-card.md`).
 2. **Owner → agent:** the owner's front door is `00.02 - intake/` — one note per item; a
    checkbox routes it (dictation · command · link · ticket · card).
 3. **Tickets (`00.03 - tickets/`):** long-running, round-trip work — one file each, shaped as a
@@ -237,6 +239,15 @@ irreversible (deleting anything not obviously transient), or when **two items bo
 5. Sweep: the **action sweep** processes **every** checked handoff (loop-owned or not) and files the
    note in `00.04 - outbox/`; the weekly pass clears handoffs the owner has ruled on and refreshes the
    board. Afterward `00.01` holds only live handoffs; `00.02` holds only unhandled intake notes.
+
+**Decision cards** (`00.01`, `type: decision-card`) are the fourth surface: an agent → owner item carrying
+**one decision plus its option set**, each option pre-baked with its exact payload, plus a tickable
+*Do none of these* and an **Execute**. Tick options = record the choice; tick **Execute** = fire the apply,
+which replays the ticked payloads, logs, and files the card to `00.04`. Frontmatter stays inside the
+vocabularies above (`status: active`, `turn:`, `action: pending|done`) so it needs no new detection — the
+sweep already reads `action: pending` + a checked box. Emit one **only** for a genuine pick-from-a-set
+(2+ discrete options); everything else stays a handoff or a ticket. Doctrine:
+[[03 - PERMANENT/03.01 - concepts/inbox-decision-card|The Inbox Decision Card]].
 
 ### Ideas — expire unless attached
 `seed` ideas get a 30-day clock. Unattached seeds are archived by the monthly sweep. An
@@ -300,6 +311,12 @@ triage digest. Bump `updated:` on every edit.
   skimmable **bullet list** distilling the post's *actual* point in short sentences — **raw info
   only, no invention, no synthesis** (the analysis read as wrong). Resource = `source.md` (raw) +
   `shaped.md`; `serves:`/`why:`/`signal:`/`review_by:` carried onto `shaped.md`.
+- **2026-10-17** — **decision cards** adopted as a fourth inbox surface (owner-approved, from the
+  voice-guide ticket): an agent → owner item in `00.01` with the option set *and* its paste-ready payloads
+  inline, a tickable *Do none of these*, and an **Execute**. `type: decision-card` added to §4; the four
+  surfaces are now handoff · **decision card** · intake · ticket. Kept inside the existing vocabularies
+  (`status: active` — not the draft's `open|working`) and the existing sweep detection (`action: pending`),
+  so no new code and no new folder. Template + base docs ship on the next `regenerate the template`.
 
 ---
 
