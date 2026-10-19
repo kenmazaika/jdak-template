@@ -1,6 +1,7 @@
 ---
 name: "loop-studio"
 description: "Build a complete, runnable vault loop from a plain-text brief — scaffold the 06-LOOPS folder, a generic executor skill, the inbox approval flow, hyperparameters, and the runs/ baton trail. Trigger: 'Loop Studio' / 'build a loop' / 'new loop <topic>'."
+base: true
 ---
 
 # Loop Studio

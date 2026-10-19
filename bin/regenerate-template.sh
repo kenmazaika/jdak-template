@@ -75,12 +75,28 @@ cp "$V/05 - KITS/05.05 - feedback/README.md" "$V/05 - KITS/05.05 - feedback/rubr
 cp "$V/05 - KITS/05.06 - qball.md" "$V/05 - KITS/05.07 - skill-handoffs.md" \
    "$V/05 - KITS/05.08 - compact.md" "$V/05 - KITS/05.09 - inbox-message-playbook.md" "05 - KITS/"
 
-# SKILLS — the management kit ships; instance skills do not
-cp "$V/07 - SKILLS/README.md" "07 - SKILLS/"
-for s in "07.03 - loop-studio" "07.07 - checkbox-runner" "07.08 - project-boot" \
-         "07.09 - project-status" "vault-keeper" "qball-router"; do
-  [ -d "$V/07 - SKILLS/$s" ] && cp -a "$V/07 - SKILLS/$s" "07 - SKILLS/"
-done
+# SKILLS — ship only skills that declare `base: true` in SKILL.md frontmatter.
+# Numbering is a shelf convention, not a shipping promise: a numbered skill can still be instance-bound.
+# The base README is generated from README.base.md so instance skills are never advertised.
+if [ -f "$V/07 - SKILLS/README.base.md" ]; then
+  cp "$V/07 - SKILLS/README.base.md" "07 - SKILLS/README.md"
+else
+  cp "$V/07 - SKILLS/README.md" "07 - SKILLS/"
+fi
+python3 - "$V/07 - SKILLS" "07 - SKILLS" <<'PY'
+import pathlib, re, shutil, sys
+src, dst = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
+shipped = []
+for d in sorted(src.iterdir()):
+    f = d / "SKILL.md"
+    if not d.is_dir() or not f.is_file():
+        continue
+    head = f.read_text(encoding="utf-8", errors="replace")[:800]
+    if re.search(r"^base:\s*true\s*$", head, re.M):
+        shutil.copytree(d, dst / d.name, dirs_exist_ok=True)
+        shipped.append(d.name)
+print("shipped skills:", ", ".join(shipped) or "(none)")
+PY
 
 # bin/ — the sync stack (base)
 for f in vault-sync.sh vault-paths.sh vault-conflict-merge.py vault-sync-watch.py \

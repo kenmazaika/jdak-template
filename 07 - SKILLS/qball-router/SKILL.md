@@ -1,6 +1,7 @@
 ---
 name: "qball-router"
 description: "Route the first file-write in a thread to the right QBall: search existing balls, attach if relevant, else create one."
+base: true
 ---
 
 # qball-router

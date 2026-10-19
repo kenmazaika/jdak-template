@@ -1,6 +1,7 @@
 ---
 name: "project-boot"
 description: "Project start ritual: registry to PROJECT.md to decisions to BALL, restate in 5 bullets, ask the one blocking decision."
+base: true
 ---
 
 # project-boot

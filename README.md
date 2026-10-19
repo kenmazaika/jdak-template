@@ -41,8 +41,8 @@ short version:
    symlinked into the workspace; register MCP servers + secrets; symlink `07 - SKILLS/*` into `skills/`.
 6. **Verify** — `vault-sync.sh` exits 0, the watcher is active, and a test note reaches your phone.
 
-> **Why `99 - META`:** the vault is the source of truth. The agent's instruction files, the management
-> skills (`07.01–07.09`), and the sync scripts all live *inside* it, so they sync and version together.
+> **Why `99 - META`:** the vault is the source of truth. The agent's instruction files, the `base: true`
+> skills, and the sync scripts all live *inside* it, so they sync and version together.
 > `TOOLS.md` is the local cheat sheet: sync paths, secret pointers, MCP names, machine specifics.
 
 ## The problems it solves

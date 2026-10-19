@@ -1,6 +1,7 @@
 ---
 name: "project-status"
 description: "Answer what work is left from files: read BALLS.md plus each PROJECT.md, emit an evidence-linked digest."
+base: true
 ---
 
 # project-status

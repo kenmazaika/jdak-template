@@ -35,7 +35,7 @@ empty) the instance.
 | `04 - RESOURCES/` | instance | empty |
 | `05 - KITS/05.03 - scripts/` · `05.02 - templates/` | base | keep |
 | `06 - LOOPS/` | base | keep — define *your* loops |
-| `07 - SKILLS/` | instance | vendor your own |
+| `07 - SKILLS/` | mixed | keep skills with `base: true`; clear personal (`base: false`) |
 | `08 - PRODUCTION/` (drafts · working · media) | instance | empty |
 | `09 - FLEETING/` · `10 - ARCHIVE/` | instance | empty |
 | `99 - META/` (state ledgers) | instance | reset |
@@ -47,8 +47,8 @@ empty) the instance.
 2. **Name it.** Set the vault name in `bin/vault-sync.sh` (`SRC` / `DST`) and, optionally,
    retitle `README.md`.
 3. **Empty the instance.** Clear `01 - PROJECTS/01.02 - qballs/*`, `03 - PERMANENT/*`, `04 - RESOURCES/*`,
-   `07 - SKILLS/*`, `08 - PRODUCTION/*`, `09 - FLEETING/*`, `10 - ARCHIVE/*`, and the state files in
-   `99 - META/`. Reset `INBOX.md`, `BALLS.md`, `log.md`.
+   the **personal** skills in `07 - SKILLS/*` (`base: false`; keep `base: true`), `08 - PRODUCTION/*`,
+   `09 - FLEETING/*`, `10 - ARCHIVE/*`, and the state files in `99 - META/`. Reset `INBOX.md`, `BALLS.md`, `log.md`.
 4. **Wire Obsidian.** Point the *Templates* plugin at `05 - KITS/05.02 - templates`; the
    *Daily notes* plugin at `02 - AREAS/02.04 - daily-notes`, with the `daily-note` template.
 5. **Wire sync.** Configure an rclone remote + `bin/vault-sync.sh` + a cron (see README
@@ -61,4 +61,5 @@ empty) the instance.
 - The category folders themselves — the structure *is* the value.
 - `SCHEMA.md` and the growth protocol — that's what keeps it agent-growable.
 - The per-category `README.md` files — they're the self-describing map.
+- The `base: true` skills in `07 - SKILLS/` — they're the management kit.
 - `bin/` (`vault-sync.sh`, `vault-sync-watch.py` + filters) if you want phone sync.
