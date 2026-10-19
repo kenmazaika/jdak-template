@@ -1,6 +1,7 @@
 ---
 name: "checkbox-runner"
 description: "Two guarantees for any checkbox-triggered agent runner: claim the box on pickup; never orphan a spawned subagent."
+base: true
 ---
 
 # Checkbox runner — claim on pickup, never orphan

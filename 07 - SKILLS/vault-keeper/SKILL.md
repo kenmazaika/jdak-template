@@ -1,6 +1,7 @@
 ---
 name: "vault-keeper"
 description: "Weekly vault triage: dedupe captures, tag authority/kind, review guidance inbox, refresh BALLS.md, emit ONE digest."
+base: true
 ---
 
 # vault-keeper
