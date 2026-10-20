@@ -1,0 +1,17 @@
+# Nested git repos / scratch checkouts that must not be added to the vault.
+# The agent-run-cost-review pipeline uses a clean-room workspace clone with its own
+# (empty) .git; git refuses to `add -A` it ("does not have a commit checked out").
+**/cleanroom/
+
+# Python bytecode caches
+__pycache__/
+*.pyc
+
+# OS / editor cruft
+.DS_Store
+.obsidian/workspace*
+*.tmp
+
+# Heavy generated data (regenerable; GitHub rejects files >100MB)
+*.duckdb
+*.duckdb.wal
