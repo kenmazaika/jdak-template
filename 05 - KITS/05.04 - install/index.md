@@ -63,8 +63,21 @@ The sync is **four scripts + one unit**, all vendored in `bin/`:
 rclone config create dropbox dropbox        # follow the OAuth prompt
 ```
 
-**2. Paths + filter** — copy `vault-paths.sh`, `rclone-vault.filters` into `$WS/bin/`, and set
-`JDAK_VAULT_ROOT` in `~/.openclaw/.env`.
+**2. Install the sync runtime** — copy every runtime dependency into the workspace before invoking it:
+
+```bash
+mkdir -p "$WS/bin" "$HOME/.config/systemd/user"
+install -m 0755 "$VAULT/bin/vault-sync.sh" "$VAULT/bin/vault-conflict-merge.py" \
+  "$VAULT/bin/vault-sync-watch.py" "$WS/bin/"
+install -m 0644 "$VAULT/bin/vault-paths.sh" "$VAULT/bin/rclone-vault.filters" "$WS/bin/"
+install -m 0644 "$VAULT/bin/systemd/vault-sync-watch.service" "$HOME/.config/systemd/user/"
+
+bash -n "$WS/bin/vault-sync.sh" "$WS/bin/vault-paths.sh"
+python3 -m py_compile "$WS/bin/vault-conflict-merge.py" "$WS/bin/vault-sync-watch.py"
+systemd-analyze --user verify "$HOME/.config/systemd/user/vault-sync-watch.service"
+```
+
+Set `JDAK_VAULT_ROOT` in `~/.openclaw/.env` if the vault is not at `$WS/Vault`.
 
 **3. First sync + baseline:**
 ```bash
@@ -76,8 +89,7 @@ $WS/bin/vault-sync.sh            # first run may need: rclone bisync … --resyn
 # backstop: every 15 min
 */15 * * * * $WS/bin/vault-sync.sh >/dev/null 2>&1
 
-# event-driven (recommended): user systemd unit
-cp "$VAULT/bin/systemd/vault-sync-watch.service" ~/.config/systemd/user/
+# event-driven (recommended): user systemd unit installed in step 2
 systemctl --user daemon-reload && systemctl --user enable --now vault-sync-watch.service
 loginctl enable-linger "$USER"     # keep it running after logout
 ```
