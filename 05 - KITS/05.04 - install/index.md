@@ -165,13 +165,17 @@ One JSON/key file per service, `chmod 600`. Record a **pointer list** in `TOOLS.
 
 ### D5 · Skills → vendor + symlink
 
-The vault ships the **management kit** as numbered skills (`07.01–07.09`): distribution-scout,
-wispr-dictation, loop-studio, blog-idea-scout, feedback-miner, use-case-factory, **checkbox-runner**,
-**project-boot**, **project-status**. Un-numbered dirs are **personal** skills.
+The vault ships its generic management kit as skills marked `base: true`. Numbering organizes the
+shelf; it does not decide what ships. Skills marked `base: false` stay in the instance.
 
 ```bash
-mkdir -p "$VAULT/07 - SKILLS/my-skill"       # put SKILL.md here (numbered if it ships)
-ln -sfn "$VAULT/07 - SKILLS/my-skill" "$WS/skills/my-skill"
+mkdir -p "$WS/skills"
+while IFS= read -r -d '' skill_file; do
+  skill_dir=${skill_file%/SKILL.md}
+  ln -sfn "$skill_dir" "$WS/skills/${skill_dir##*/}"
+done < <(grep -rlZx --include=SKILL.md 'base: true' "$VAULT/07 - SKILLS")
+
+find "$WS/skills" -mindepth 1 -maxdepth 1 -type l -printf '%f -> %l\n' | sort
 ```
 
 ### D6 · Loops + schedulers
