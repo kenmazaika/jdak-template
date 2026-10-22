@@ -100,7 +100,7 @@ PY
 
 # bin/ — the sync stack (base)
 for f in vault-sync.sh vault-paths.sh vault-conflict-merge.py vault-sync-watch.py \
-         inbox-action-check.sh rclone-vault.filters regenerate-template.sh; do
+         inbox-action-check.sh inbox-live-open.sh rclone-vault.filters regenerate-template.sh; do
   [ -f "$WS/bin/$f" ] && cp "$WS/bin/$f" bin/
 done
 [ -f "$WS/bin/systemd/vault-sync-watch.service" ] && cp "$WS/bin/systemd/vault-sync-watch.service" bin/systemd/

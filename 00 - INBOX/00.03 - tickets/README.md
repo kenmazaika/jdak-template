@@ -99,6 +99,16 @@ The agent's reply is **a normal chat reply** — a few sentences, first person, 
       `runs` / `updated`; clears the ✍️ slot.
 3. You read the reply, write your next message. Repeat until **Close**.
 
+## Live tickets (`mode: live`)
+
+Say **"take ticket <name> live"** and the ticket is held in chat for the session — the agent acts on each
+message in the same turn and rewrites the card **before** replying. The sweep stands down for `LIVE_TTL`
+(6h) so it can't fight the conversation, and past the TTL it takes the ticket back. Closing stays mechanical
+(`bin/inbox-close-request.sh`). Full runbook: [[05 - KITS/05.01 - macros/live-session]].
+
+**Rule of thumb:** live mode is for thinking out loud. Anything that must survive the conversation goes in a
+file and gets linked from the thread.
+
 ## Rules
 
 - **Name it descriptively.** A ticket file is `<YYYY-MM-DD>-<topic-slug>` — lower-case-hyphenated. If it
