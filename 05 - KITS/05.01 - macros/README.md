@@ -33,6 +33,7 @@ A mini-skill, authored in the vault, invoked by a phrase.
 | `reorganize the shelves` | [`reorganize-shelves.md`](reorganize-shelves.md) | Sort & renumber the shelves top-down (general-first, contiguous), fix references, re-sync. |
 | `Loop Studio` | [`loop-studio.md`](loop-studio.md) | Turn a plain-text brief into a complete, runnable loop (folder · skill · inbox approval · runs/). |
 | `execute the ticket` | [`execute-the-ticket.md`](execute-the-ticket.md) | Run a ticket's latest comment (reverse-prompt → execute → write back). |
+| `take ticket <name> live` | [`live-session.md`](live-session.md) | Hold a ticket in chat for a session: act per message, rewrite the card each turn, recap on close. |
 | `regenerate the template` | [`regenerate-template.md`](regenerate-template.md) | Rebuild the base `jdak-template` repo from the vault (genericized + leak-checked) and push it. |
 
 *(add yours below.)*
