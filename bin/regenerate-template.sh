@@ -49,6 +49,7 @@ mkdir -p "00 - INBOX/00.01 - handoffs" "00 - INBOX/00.02 - intake" "00 - INBOX/0
 # 4) base files
 cp "$V/README.md" "$V/SCHEMA.md" "$V/TEMPLATE.md" .
 cp "$V/.gitignore" . 2>/dev/null || true
+git show "origin/$BRANCH:LICENSE" > LICENSE 2>/dev/null || true
 : > BALLS.md; : > INBOX.md; : > index.md; : > log.md
 
 cp "$V/00 - INBOX/README.md" "00 - INBOX/"
@@ -100,7 +101,7 @@ PY
 
 # bin/ — the sync stack (base)
 for f in vault-sync.sh vault-paths.sh vault-conflict-merge.py vault-sync-watch.py \
-         inbox-action-check.sh inbox-live-open.sh rclone-vault.filters regenerate-template.sh; do
+         inbox-action-check.sh inbox-close-request.sh inbox-live-open.sh rclone-vault.filters regenerate-template.sh; do
   [ -f "$WS/bin/$f" ] && cp "$WS/bin/$f" bin/
 done
 [ -f "$WS/bin/systemd/vault-sync-watch.service" ] && cp "$WS/bin/systemd/vault-sync-watch.service" bin/systemd/
@@ -110,6 +111,7 @@ python3 - "$WORK" <<'PY'
 import pathlib, sys
 root = pathlib.Path(sys.argv[1])
 REPL = [
+    ("JDAK contributors", "JDAK contributors"),
     ("your-publish-blog", "your-publish-blog"),
     ("your-engineering-blog", "your-engineering-blog"),
     ("your-org", "your-org"),

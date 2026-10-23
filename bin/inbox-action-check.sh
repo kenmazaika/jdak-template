@@ -86,6 +86,13 @@ fi
 for f in "$H"/*.md; do
   [ -f "$f" ] || continue
   has_outbox_twin "$f" && continue
+
+  # SELF-CLOSE: a ticked "Mark as read" is a DISMISS, not an action. Handled here so a
+  # handoff without `action: pending` still closes instead of sitting in the inbox.
+  if [ -x "$SCRIPT_DIR/inbox-close-request.sh" ] && [ "${INBOX_AUTOCLOSE:-1}" != "0" ]; then
+    bash "$SCRIPT_DIR/inbox-close-request.sh" "$f" >/dev/null 2>&1 && continue
+  fi
+
   grep -q '^action: pending' "$f" 2>/dev/null || continue
   grep -qE '^- \[[xX]\]' "$f" 2>/dev/null && emit handoff "$f"
 done
@@ -94,6 +101,11 @@ done
 for f in "$I"/*.md; do
   [ -f "$f" ] || continue
   has_outbox_twin "$f" && continue
+
+  if [ -x "$SCRIPT_DIR/inbox-close-request.sh" ] && [ "${INBOX_AUTOCLOSE:-1}" != "0" ]; then
+    bash "$SCRIPT_DIR/inbox-close-request.sh" "$f" >/dev/null 2>&1 && continue
+  fi
+
   grep -qE '^status: new' "$f" 2>/dev/null || continue
   grep -qE '^- \[[xX]\]' "$f" 2>/dev/null && emit intake "$f"
 done
@@ -104,8 +116,21 @@ for f in "$T"/*.md; do
   has_outbox_twin "$f" && continue
   st=$(grep -m1 '^status:' "$f" 2>/dev/null | sed 's/^status:[[:space:]]*//; s/[[:space:]]*$//')
   [ "$st" = "done" ] && continue
+
+  # SELF-CLOSE: a ticked box under a close-intent heading means "move to outbox".
+  # Deterministic, no model call (bin/inbox-close-request.sh). Handled tickets are
+  # moved local+upstream here and never emitted, so they cost nothing.
+  if [ -x "$SCRIPT_DIR/inbox-close-request.sh" ] && [ "${INBOX_AUTOCLOSE:-1}" != "0" ]; then
+    bash "$SCRIPT_DIR/inbox-close-request.sh" "$f" >/dev/null 2>&1 && continue
+  fi
   mtime=$(stat -c %Y "$f" 2>/dev/null || echo 0)
   age=$(( NOW - mtime ))
+
+  # LIVE TICKET (mode: live) — the chat owns it. The sweep stands down while the file is
+  # warm; if the conversation goes quiet past LIVE_TTL (default 6h) the sweep takes it
+  # back, so a live ticket cannot be lost by walking away.
+  mode=$(grep -m1 '^mode:' "$f" 2>/dev/null | sed 's/^mode:[[:space:]]*//; s/[[:space:]]*$//')
+  if [ "$mode" = "live" ] && [ "$age" -lt "${LIVE_TTL:-21600}" ]; then continue; fi
   checked=0
   grep -qE '^- \[[xX]\]' "$f" 2>/dev/null && checked=1
 
