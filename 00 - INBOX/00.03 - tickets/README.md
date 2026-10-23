@@ -22,13 +22,13 @@ folder — the baton you hand the agent. It stays alive across many rounds, and 
 
 ## What a ticket is (vs everything else)
 
-| Folder | Direction | Shape | Lifespan |
-|---|---|---|---|
-| Handoff (`00.01`) | agent → owner | one decision, one screen | one rule-on, then out |
-| Decision card (`00.01`) | agent → owner | one decision + its option set, payloads inline | one execute, then out |
-| Intake (`00.02`) | owner → agent | one item, routed by a box | one routing |
-| **Ticket (`00.03`)** | **owner → agent, round-trip** | **a conversation, newest-first** | **many rounds, until closed** |
-| Outbox (`00.04`) | done → out | processed notes | terminal |
+| Folder                  | Direction                     | Shape                                          | Lifespan                      |
+| ----------------------- | ----------------------------- | ---------------------------------------------- | ----------------------------- |
+| Handoff (`00.01`)       | agent → owner                 | one decision, one screen                       | one rule-on, then out         |
+| Decision card (`00.01`) | agent → owner                 | one decision + its option set, payloads inline | one execute, then out         |
+| Intake (`00.02`)        | owner → agent                 | one item, routed by a box                      | one routing                   |
+| **Ticket (`00.03`)**    | **owner → agent, round-trip** | **a conversation, newest-first**               | **many rounds, until closed** |
+| Outbox (`00.04`)        | done → out                    | processed notes                                | terminal                      |
 
 ## The ticket file
 
@@ -38,6 +38,7 @@ title: "Ticket — <title>"
 type: ticket
 status: open            # open (your turn) | working (my turn) | blocked (needs you to unblock) | done
 turn: you               # you | agent | —
+mode: queue             # queue (file mailbox) | live (chat-held — see below)
 backing: "[[09 - FLEETING/09.07 - tickets/<slug>]]"
 prompt_log: "[[09 - FLEETING/09.07 - tickets/<slug>/PROMPTS]]"
 runs: 0
@@ -101,9 +102,9 @@ The agent's reply is **a normal chat reply** — a few sentences, first person, 
 
 ## Live tickets (`mode: live`)
 
-Say **"take ticket <name> live"** and the ticket is held in chat for the session — the agent acts on each
-message in the same turn and rewrites the card **before** replying. The sweep stands down for `LIVE_TTL`
-(6h) so it can't fight the conversation, and past the TTL it takes the ticket back. Closing stays mechanical
+Say **"take ticket <name> live"** and the ticket is held in chat for the session — I act on each message in
+the same turn and rewrite the card **before** replying. The sweep stands down for `LIVE_TTL` (6h) so it can't
+fight the conversation, and past the TTL it takes the ticket back. Closing stays mechanical
 (`bin/inbox-close-request.sh`). Full runbook: [[05 - KITS/05.01 - macros/live-session]].
 
 **Rule of thumb:** live mode is for thinking out loud. Anything that must survive the conversation goes in a
