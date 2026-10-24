@@ -38,7 +38,8 @@ folders-above-files, **contiguous at every level** — then fix every reference 
 
 ## Exempt (never renumbered)
 `10 - ARCHIVE` (read-only history) · `99 - META` (sentinel) · `01 - PROJECTS` (`01.NN` QBall ids —
-referenced vault-wide) · `07 - SKILLS` (numbering *is* the system/personal signal).
+referenced vault-wide) · `07 - SKILLS` (directory names may be referenced by symlinks and workflows;
+`base: true` alone controls shipping).
 
 ## Output
 → renumbered shelves · updated references · refreshed `index.md` · synced.
