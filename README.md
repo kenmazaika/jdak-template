@@ -119,7 +119,7 @@ there. Full rules — including how the agent *grows* the structure — are in `
 | `06` | **LOOPS** | *What runs on a schedule?* — registered loops + their runs. |
 | `07` | **SKILLS** | *What can the agent do?* — vendored, readable, version-controlled skills. |
 | `08` | **PRODUCTION** | *What are we making?* — drafts, working notes, and media. |
-| `09` | **RAW** | *What did we save verbatim?* — unedited sources. |
+| `09` | **FLEETING** | *What is not ready for a durable home yet?* — temporary material awaiting promotion or archive. |
 | `10` | **ARCHIVE** | *What's done or superseded?* — read-only history. |
 | `99` | **META** | *What config/state does the agent run on?* — identity/config + state ledgers. |
 
