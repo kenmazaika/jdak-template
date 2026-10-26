@@ -23,18 +23,19 @@ Kits are deliberately *more verbose* than skills — they carry the structure, n
 | `05.01` | `macros/` | **Macros:** the owner's phrase → routine surface — the list + one file per macro (see `05.01 - macros/README.md`). |
 | `05.02` | `templates/` | Page scaffolding (daily-note, handoff, project, area, capture, macro, …). |
 | `05.03` | `scripts/` | The vault's own tooling (`gen-index.py`, sync helpers). |
-| `05.04` | [`qball.md`](05.04%20-%20qball.md) | **Kit — QBall:** the resumable-work bundle (6 layers, symlink rule, handoff/resume, ship-it signal). |
-| `05.05` | [`skill-handoffs.md`](05.05%20-%20skill-handoffs.md) | **Kit — Skill pipelines & handoffs:** chaining skills into a multi-phase pipeline with the file as the baton. |
-| `05.06` | [`compact.md`](05.06%20-%20compact.md) | **Kit — Compact:** the one-word sort/renumber op (general-first · folders-above-files). |
-| `05.07` | [`inbox-message-playbook.md`](05.07%20-%20inbox-message-playbook.md) | **Kit — Inbox-message playbook:** how to write an agent→owner handoff (scan, decide, checkboxes). |
-| `05.08` | `install/` | Install kit — vault, sync, and the agent integration points. |
+| `05.04` | `install/` | Install kit — vault, sync, and the agent integration points. |
+| `05.05` | [`feedback/README.md`](05.05%20-%20feedback/README.md) | **Kit — Feedback:** the one corpus (`feedback.md`), the capture→batch→collapse→replay→promote pipeline, the weekly mining loop, `rules.md`. |
+| `05.06` | [`qball.md`](05.06%20-%20qball.md) | **Kit — QBall:** the resumable-work bundle (6 layers, symlink rule, handoff/resume, ship-it signal). |
+| `05.07` | [`skill-handoffs.md`](05.07%20-%20skill-handoffs.md) | **Kit — Skill pipelines & handoffs:** chaining skills into a multi-phase pipeline with the file as the baton. |
+| `05.08` | [`compact.md`](05.08%20-%20compact.md) | **Kit — Compact:** the one-word sort/renumber op (general-first · folders-above-files). |
+| `05.09` | [`inbox-message-playbook.md`](05.09%20-%20inbox-message-playbook.md) | **Kit — Inbox-message playbook:** how to write an agent→owner handoff (scan, decide, checkboxes). |
 
 > **Loops** and **meta** have their own top-level categories: `06 - LOOPS` (registered loops + runs) and
 > `99 - META` (agent identity/config + state ledgers).
 >
 > **2026-10-14 renumber:** macros folded into a single numbered folder (`05.01 - macros/` — the list + the
 > definitions); `templates/` moved up to `05.02`; two stale docs (`capture-policy`, `dictation-capture`)
-> retired to `10 - ARCHIVE/`. The shelf is contiguous `05.01`–`05.08`.
+> retired to `10 - ARCHIVE/`. The base shelf is contiguous through `05.09`; instance-only kits may follow.
 
 ## Notes
 

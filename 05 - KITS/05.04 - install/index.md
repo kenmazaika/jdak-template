@@ -32,7 +32,7 @@ wire it to an agent (OpenClaw, Hermes, …). Two audiences: **the human** (A–C
 
 1. Install **Obsidian** on desktop and mobile.
 2. Install the **Dropbox** app (desktop + mobile); sign in.
-3. Create a **private GitHub repo** for the vault. Have the URL ready.
+3. Create an **empty private GitHub repo** for the vault. Have its SSH URL ready.
 4. Note the **Dropbox app folder** the vault lives in — this stack uses
    `Dropbox:Apps/remotely-save/jdak-stack`.
 
@@ -41,9 +41,16 @@ wire it to an agent (OpenClaw, Hermes, …). Two audiences: **the human** (A–C
 ```bash
 export WS="$HOME/.openclaw/workspace"
 export VAULT="$WS/Vault"
-git clone git@github.com:<you>/<your-vault>.git "$VAULT"   # or: fork the template, then clone
-cd "$VAULT" && git status                                   # clean
+git clone <JDAK-template-repo-url> "$VAULT"
+cd "$VAULT"
+git remote rename origin template
+git remote add origin git@github.com:<you>/<your-vault>.git
+git push -u origin main
+git status                                                   # clean
 ```
+
+If you used GitHub's **Use this template** button to create a populated private repository instead,
+clone that repository directly and skip the remote rename/add/push commands.
 
 ## Part C · Sync (vault ↔ Dropbox ↔ Obsidian) — the real scripts
 

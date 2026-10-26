@@ -9,6 +9,14 @@
 #   PUSH=0 bash bin/regenerate-template.sh       # build + commit locally, do not push
 #   TEMPLATE_REPO=git@… TEMPLATE_WORK=/tmp/t bash bin/regenerate-template.sh
 #
+# Scoped build (for a focused PR when the vault carries unrelated unshipped drift):
+#   SCOPE_PATHS=$'README.md\n05 - KITS/05.04 - install/index.md' bash bin/regenerate-template.sh
+#   SCOPE_FILE=runs/2026-10-24/scope.txt bash bin/regenerate-template.sh
+#   The build still runs from the vault, then every changed path outside the scope is
+#   restored to origin/<branch> (or dropped if new). Result: diff == scope, nothing hand-edited.
+#   A trailing "/" in a scope entry authorizes a whole directory.
+#   SCOPE_STRICT=1 with an empty scope = drop every change (self-test: expect "no changes").
+#
 # Safe to re-run: it always rebuilds from the vault, and no-ops if nothing changed.
 set -euo pipefail
 
@@ -18,6 +26,14 @@ REPO=${TEMPLATE_REPO:-git@github.com:your-org/jdak-template.git}
 WORK=${TEMPLATE_WORK:-$WS/tmp/jdak-template}
 BRANCH=${TEMPLATE_BRANCH:-main}
 PUSH=${PUSH:-1}
+
+# SCOPE_FILE is caller-relative; resolve it before we cd into the template clone.
+if [ -n "${SCOPE_FILE:-}" ]; then
+  case "$SCOPE_FILE" in
+    /*) ;;
+    *) SCOPE_FILE="$PWD/$SCOPE_FILE" ;;
+  esac
+fi
 
 command -v git >/dev/null || { echo "git required"; exit 1; }
 [ -d "$V" ] || { echo "vault not found: $V"; exit 1; }
@@ -147,8 +163,66 @@ if grep -rIl -e "your-org" -e "$HOME" -e "\bthe owner\b" . --exclude-dir=.git 2>
   exit 1
 fi
 
-# 7) commit + push
+# 6b) optional scope filter — keep the generated diff inside the run's declared scope
+SCOPE_LIST=()
+if [ -n "${SCOPE_FILE:-}" ]; then
+  [ -f "$SCOPE_FILE" ] || { echo "scope file not found: $SCOPE_FILE" >&2; exit 1; }
+  while IFS= read -r line || [ -n "$line" ]; do
+    line=${line%$'\r'}; line="${line#"${line%%[![:space:]]*}"}"; line="${line%"${line##*[![:space:]]}"}"
+    [ -z "$line" ] && continue
+    case "$line" in \#*) continue;; esac
+    SCOPE_LIST+=("${line#./}")
+  done < "$SCOPE_FILE"
+fi
+if [ -n "${SCOPE_PATHS:-}" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    line=${line%$'\r'}; line="${line#"${line%%[![:space:]]*}"}"; line="${line%"${line##*[![:space:]]}"}"
+    [ -z "$line" ] && continue
+    SCOPE_LIST+=("${line#./}")
+  done <<< "$SCOPE_PATHS"
+fi
+
 git add -A
+
+if [ "${#SCOPE_LIST[@]}" -gt 0 ] || [ "${SCOPE_STRICT:-0}" = "1" ]; then
+  in_scope() {
+    local p="$1" s
+    for s in ${SCOPE_LIST[@]+"${SCOPE_LIST[@]}"}; do
+      [ "$p" = "$s" ] && return 0
+      case "$s" in
+        */) case "$p" in "$s"*) return 0;; esac;;
+      esac
+    done
+    return 1
+  }
+
+  dropped=0; dropped_names=()
+  mapfile -t _changed < <(git diff --cached --name-only)
+  for p in ${_changed[@]+"${_changed[@]}"}; do
+    [ -z "$p" ] && continue
+    in_scope "$p" && continue
+    if git cat-file -e "origin/$BRANCH:$p" 2>/dev/null; then
+      git checkout -q "origin/$BRANCH" -- "$p"
+    else
+      git rm -q --cached --ignore-unmatch -- "$p" >/dev/null 2>&1 || true
+      rm -f -- "$p"
+    fi
+    dropped_names+=("$p"); dropped=$((dropped + 1))
+  done
+
+  echo "==> scope: ${#SCOPE_LIST[@]} authorized path(s); dropped $dropped out-of-scope change(s)"
+  for p in ${dropped_names[@]+"${dropped_names[@]}"}; do echo "    - dropped: $p"; done
+
+  mapfile -t _final < <(git diff --cached --name-only)
+  for s in ${SCOPE_LIST[@]+"${SCOPE_LIST[@]}"}; do
+    case "$s" in */) continue;; esac
+    found=0
+    for p in ${_final[@]+"${_final[@]}"}; do [ "$p" = "$s" ] && found=1 && break; done
+    [ "$found" = "1" ] || echo "==> WARN: scoped path has no change: $s" >&2
+  done
+fi
+
+# 7) commit + push
 if git diff --cached --quiet; then
   echo "==> no changes (template already matches the vault base)"
 else
