@@ -36,7 +36,7 @@ MERGE=${MERGE:-$SCRIPT_DIR/vault-conflict-merge.py}
 GIT=${GIT:-/usr/bin/git}
 PY=${PY:-/usr/bin/python3}
 MAX_DELETE=${MAX_DELETE:-50}
-GIT_ID=(-c user.email=felix@openclaw.local -c user.name=Felix)
+GIT_ID=(-c user.email=jdak-sync@localhost -c user.name="JDAK Sync")
 
 mkdir -p "$(dirname "$LOG")" "$BACKUP1" "$REVIEW"
 log() { echo "===== $(date -Is) $* =====" >> "$LOG"; }
