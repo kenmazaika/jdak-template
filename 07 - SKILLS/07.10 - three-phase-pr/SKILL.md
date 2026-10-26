@@ -1,6 +1,6 @@
 ---
 name: "three-phase-pr"
-description: "Run a three-phase development loop that turns project context into one focused pull request: research and specify the idea, implement it on a separate branch, then validate and open the PR. Trigger: 'three-phase PR' / 'run the dev loop' / a loop that cites this skill."
+description: "Run a three-phase development loop that turns project context into one focused pull request: research and specify the idea, implement it on a separate branch, then validate and open the PR. Scope drift from a generated build is repaired, not rejected. Trigger: 'three-phase PR' / 'run the dev loop' / a loop that cites this skill."
 base: true
 ---
 
@@ -16,6 +16,9 @@ supplies the procedure.
 - **Each phase is a fresh process.** It reads the previous phase's file (the baton), not the chat.
 - **Two valid "no" outcomes.** The idea phase may conclude *nothing worth doing*; the validation phase
   may conclude *do not open a PR*. Both are successful runs.
+- **Scope failure is repaired before it is fatal.** When the project's build regenerates output from a
+  source tree that carries unrelated, unshipped drift, the validator rebuilds with the run's declared
+  scope and revalidates. Reject real scope creep; never reject the idea because of pre-existing drift.
 - **Never merge.** The PR is the handoff to the owner.
 - **No instance data.** The PR must be useful to any fork of the project, not just this instance.
 
@@ -50,10 +53,14 @@ supplies the procedure.
 4. **Explore, then converge.** Within the chosen category, inspect the real artifacts (files, docs,
    scripts, install path). Collect **evidence**: exact paths, line references, broken links, missing
    hooks, failed commands. Do not propose a theme; propose a change.
-5. **Write `01-idea.md`.** It must be implementable by a process that has never seen this conversation:
+5. **Write `01-idea.md` plus a machine-readable scope file.** It must be implementable by a process that
+   has never seen this conversation:
    - title + category
    - the problem, with evidence
    - the proposed change (file by file)
+   - **`scope.txt`** next to the baton — the exact output paths this change may touch, one per line
+     (a trailing `/` authorizes a directory). This file, not prose, is what the validator compares
+     against, and what a scoped rebuild consumes.
    - acceptance criteria (observable)
    - non-goals / what not to touch
    - risks + rollback
@@ -79,19 +86,37 @@ the run. Do not implement.
 **Stop rule:** if the change cannot be implemented as specified, stop and write `02-implementation.md`
 with `status: blocked` + the exact blocker. Do not improvise a different PR.
 
+**Drift is not a blocker.** If a generated build also carries unrelated changes that were already in the
+source tree before this run, record them under "Deviations" and leave the branch for Phase 3. Do not
+revert the source, and do not hand-edit generated output.
+
 ## Phase 3 — Validate & open the PR
 
 **Goal:** independently verify the work, then open a clean PR — or refuse.
 
-1. Read `01-idea.md` + `02-implementation.md` + the diff. Do not assume the implementer's claims.
+1. Read `01-idea.md` + `02-implementation.md` + `scope.txt` + the diff. Do not assume the implementer's
+   claims.
 2. **Validate against the acceptance criteria.** Re-run the commands. Check:
-   - the diff matches the baton's scope (no unrelated files);
+   - the diff matches `scope.txt` (no unrelated files);
    - docs/tests/scripts still work;
    - no instance data, secrets, personal paths, or owner names;
    - the loop's success criteria all pass.
-3. **Decide.** If any criterion fails, write `03-validation.md` with `verdict: no-pr`, the failing
+3. **Classify any out-of-scope path** before deciding:
+   - **Edited by this run** → real scope creep → `no-pr`;
+   - **Pre-existing, unshipped source drift** this run did not touch → **repair (step 4)**, do not reject.
+4. **Scope repair** — only when the project ships a scoped build (the loop names the flag). Rebuild
+   authorized to the run's own scope:
+   - pass `scope.txt` (or the equivalent path list) to the build, keeping "do not push" on;
+   - the build still generates from the source tree, then restores every out-of-scope path to the
+     target branch (new out-of-scope files are dropped). Nothing is hand-edited, so the next full
+     regeneration behaves normally;
+   - re-run **every** check on the repaired branch: exact-scope assertion, acceptance commands, leak
+     check, and the rest of the loop's gate.
+   Record `scope_repair: rebuilt` and the dropped paths in `03-validation.md`. If a repair still cannot
+   reach an exact scope diff, or an acceptance check depends on a dropped path, stop: `no-pr`.
+5. **Decide.** If any criterion still fails, write `03-validation.md` with `verdict: no-pr`, the failing
    criterion, and the evidence. Do not open a PR.
-4. If it passes, push the branch and open the PR:
+6. If it passes, push the branch and open the PR:
    - **Title:** a plain, descriptive summary — what changed, not why it matters.
    - **Body:** use this exact three-part shape. It must be skimmable **without opening the code**:
 
@@ -114,9 +139,9 @@ with `status: blocked` + the exact blocker. Do not improvise a different PR.
      no "comprehensive", no filler. If a reader has to open the diff to understand the *what* or the
      *why*, the body is not done.
    - Target the loop's default branch. Never merge.
-5. Write `03-validation.md`: verdict, criteria table, commands + results, PR URL.
-6. Append a `ledger.md` row: date · category · idea · PR · verdict.
-7. **Notify the owner in the inbox — not with a ticket.** Write one short handoff in
+7. Write `03-validation.md`: verdict, criteria table, commands + results, scope repair (if any), PR URL.
+8. Append a `ledger.md` row: date · category · idea · PR · verdict.
+9. **Notify the owner in the inbox — not with a ticket.** Write one short handoff in
    `00 - INBOX/00.01 - handoffs/<date>-<slug>.md` containing the PR link and **one** checkbox:
    `- [ ] **Mark as read**`. Do not add merge/close/approve boxes and do not create a ticket — the owner
    handles the PR on GitHub. Mirror one line on `INBOX.md`.
@@ -125,6 +150,8 @@ with `status: blocked` + the exact blocker. Do not improvise a different PR.
 
 - **Evidence over vibes.** Every claim in the idea points at a file, line, command, or PR.
 - **Dedupe is a gate, not a step.** If it is already in flight, it is not a new idea.
-- **Scope is the contract.** A validator rejects scope creep even when the extra change is good.
-- **Fresh eyes.** The implementer never validates their own work; the validator never rewrites it.
+- **Scope is the contract.** Reject this run's own scope creep even when the extra change is good.
+  Repair unrelated build drift with a scoped rebuild; never hand-edit generated output.
+- **Fresh eyes.** The implementer never validates their own work; the validator never rewrites it — it
+  rebuilds it to the declared scope.
 - **The PR is the artifact.** Batons are for resumability, not for the owner to read.
