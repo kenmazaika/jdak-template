@@ -12,16 +12,17 @@ base: true
 - **Before every later work-product write** (re-validation — see below).
 - When the user asks "which ball does this go in?".
 
-Canonical ball root: **`Vault/01 - PROJECTS/`** (`~/wiki/balls` and `workspace/balls` are symlinks to it).
+Set **`<vault>`** to the directory that contains `BALLS.md`. It may be the current repository root or
+a `Vault/` child of the workspace. If more than one candidate exists, ask which vault to use.
 
 ## Steps
 
 ### 1. Search for a relevant existing ball
-- Read `BALLS.md` (workspace root) — one line per project with status + next action.
-- Scan `Vault/01 - PROJECTS/01.02 - qballs/01.03 - ball-for-ball/index.md` — the hand-maintained register.
-- Keyword grep across ball frontmatter:
+- Read `<vault>/BALLS.md` — one line per project with status + next action.
+- Keyword-search every ball recursively below the projects shelf (paths and numbering may differ by vault):
   ```bash
-  grep -ril "<keyword1>\|<keyword2>" Vault/01 - PROJECTS/01.02 - qballs/*/BALL.md
+  find "<vault>/01 - PROJECTS" -type f -name BALL.md -print0 \
+    | xargs -0 grep -ilE '<keyword1>|<keyword2>'
   ```
 
 ### 2. Rank candidates — recency + status first
@@ -34,8 +35,9 @@ Canonical ball root: **`Vault/01 - PROJECTS/`** (`~/wiki/balls` and `workspace/b
 - **One strong match → adopt it.**
   1. Read the ball's `PROJECT.md`, then `decisions.md` (why), then `BALL.md` (state).
   2. Write the file **inside** that ball (`receipts/` proof, `drafts/` output, `research/` findings).
-  3. Update `BALL.md` `next_action`, `PROJECT.md` `## Next`, append a dated line to `Vault/log.md`.
-- **No match → create a ball** at `Vault/01 - PROJECTS/01.02 - qballs/<slug>/`:
+  3. Update `BALL.md` `next_action`, `PROJECT.md` `## Next`, append a dated line to `<vault>/log.md`.
+- **No match → create a ball.** Use the shared parent of existing QBall directories. If the vault has
+  no QBall yet, use `<vault>/01 - PROJECTS/01.02 - qballs/<slug>/`, the template default:
   ```
   BALL.md        # frontmatter: name, type: qball, status: active, owner, created, last_thrown, next_action
                  # + "One-screen read", "Open decisions (need the owner)", "How to resume"
