@@ -57,6 +57,8 @@ single recommendation, or an open conversation stays a normal handoff (or a tick
 - [ ] **A. <label>** — <what it does, where it lands>
       Target: [[file]] · `<exact payload>`
 - [ ] **Do none of these** — leave as-is; the card closes with no change.
+- [ ] **✏️ Something else** — not any of the above:
+      → <write it here, then tick the box>
 
 ## ▶ Control
 - [ ] **Execute** — apply the ticked options, log it, file this card.
@@ -73,6 +75,10 @@ first draft proposed) · `turn: you` for whose move.
 - **Pre-baked.** Every option carries its own final text/target, so the run *replays* the pick instead of
   re-deriving it.
 - **Always an escape hatch.** *Do none of these* is a real outcome, and it is tickable.
+- **`✏️ Something else` is mandatory — on every card, including a two-way Approve/Reject.** A fixed menu is
+  the agent's guess; without an exit the owner's only options are a wrong pick or silence, and silence reads
+  as "no decision" when it was really "neither." Ticking the box means the free text **is** the instruction:
+  replay it as written, and if it's ambiguous ask once instead of guessing. (Owner, 2026-10-26.)
 - **Bound then terminal.** One decision over a fixed option set. It does not host a back-and-forth —
   that's a ticket.
 - **Execute files it.** One run: apply → log → `00.04 - outbox/` → a one-line reply.
@@ -102,6 +108,11 @@ It processes **every** `00.01` note — **not only loop-owned ones**:
 (mechanical replay of their payloads, no re-derivation) · *Do none of these* closes the card with no
 change, and is honoured as a real decision · a ticked option whose payload no longer applies is **skipped
 and named**, never silently approximated.
+
+**A ticked `✏️ Something else` is an instruction, not a fallback.** Read the free text (the line under the
+box on a card, `## Comments` on a handoff) and execute what it says — never map it onto the nearest listed
+option. If it's ambiguous, unsafe, or contradicts the artifact, ask **one** question and leave the card
+open; do not guess and do not close it as "no decision."
 
 **Tickets (`00.03`).** A note there with a checked box is a running ticket — **Execute** → reverse-prompt
 the message, run it, write the **full answer to a file**, then reply on the ticket in a few sentences that

@@ -57,6 +57,9 @@ Body, top → bottom:
 2. **▶ Control** — the boxes:
    - `- [ ] Execute the ticket` — take my **message** and run it. *(Ticking it is the trigger.)*
    - `- [ ] Close the ticket` — stop, mark done, move this ticket to `00.04 - outbox/`.
+   - `- [ ] ✏️ Something else` — neither: the ✍️ slot carries the instruction instead. A ticket is a
+     conversation, so free-form is the *primary* input, not an afterthought. Any option set inside a reply
+     still ends with `✏️ Something else` (playbook § *The universal box*).
    - *(A ticket may carry extra boxes for its own gates — e.g. kagi's "Open the PR — say I approve".)*
 3. **💬 Thread** — the conversation, **newest first**:
    - A **`### ✍️ Your message`** slot at the very top — where you type the next ask (a messy wall of text
