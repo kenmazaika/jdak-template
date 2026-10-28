@@ -63,7 +63,7 @@ mkdir -p "00 - INBOX/00.01 - handoffs" "00 - INBOX/00.02 - intake" "00 - INBOX/0
          "09 - FLEETING" "10 - ARCHIVE" "99 - META" bin/systemd
 
 # 4) base files
-cp "$V/README.md" "$V/SCHEMA.md" "$V/TEMPLATE.md" .
+cp "$V/README.md" "$V/SCHEMA.md" "$V/TEMPLATE.md" "$V/CONTRIBUTING.md" .
 cp "$V/.gitignore" . 2>/dev/null || true
 git show "origin/$BRANCH:LICENSE" > LICENSE 2>/dev/null || true
 : > BALLS.md; : > INBOX.md; : > index.md; : > log.md
