@@ -28,6 +28,7 @@ sync — the next inbox sweep reads the checked box and performs it (then flips 
 - [ ] <action A — verb + what it does>
 - [ ] <action B>
 - [ ] <action C>
+- [ ] **✏️ Something else** — not any of the above: write it under **Comments**, tick this box, and I do that instead.
 
 ## Comments
 <!-- Type your reason / notes here. -->

@@ -49,7 +49,8 @@ in the vault, so the owner has everything in Obsidian and can just act there.
 > → `00 - INBOX/00.01 - handoffs/2026-10-14-publish-<slug>.md`
 > **Summary:** ready-to-publish draft *"<title>"* — accept or reject.
 > **Source:** [[08 - PRODUCTION/drafts/<slug>/<slug>|the draft]]
-> **Your action:** `[ ] ✅ Accept & publish` · `[ ] 🛑 Reject` · `[ ] ✏️ Reject + reason`
+> **Your action:** `[ ] ✅ Accept & publish` · `[ ] 🛑 Reject` · `[ ] ✏️ Reject + reason` · `[ ] ✏️ Something else`
+> *(every option set ends with the free-form box — playbook § _The universal box_)*
 > **Suggested actions (best takeaways):** ✅ accept — the lesson clears the new-to-the owner gate; the only
 > soft spot is the opening anecdote.
 

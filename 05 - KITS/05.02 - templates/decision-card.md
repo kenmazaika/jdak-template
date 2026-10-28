@@ -31,6 +31,13 @@ option carries its own paste-ready payload, so applying it is replay, not a re-d
 - [ ] **C. <label>** — <one line>
       Target: [[<file it changes>|<label>]] · `<exact text / command / payload, inline>`
 - [ ] **Do none of these** — leave everything as-is; the card closes with no change.
+- [ ] **✏️ Something else** — none of the above. Write it under this line, then tick this box.
+      → <your instruction, in your words; I execute it as written>
+
+> The **✏️ Something else** box is **never optional** — every option set carries it, including a two-way
+> Approve/Reject. A fixed menu is a guess about what you might want; this box is how you say the guess was
+> wrong. Ticking it means the free text **is** the instruction (if it's ambiguous, I ask once instead of
+> guessing).
 
 ## ▶ Control
 - [ ] **Execute** — apply the ticked options, log it, then file this card to `00.04 - outbox/`.
