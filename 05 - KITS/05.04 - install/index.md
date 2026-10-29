@@ -1,7 +1,7 @@
 ---
 title: Install JDAK
 created: 2026-10-11
-updated: 2026-10-16
+updated: 2026-10-28
 type: schema
 kind: fact
 status: active
@@ -21,7 +21,7 @@ wire it to an agent (OpenClaw, Hermes, …). Two audiences: **the human** (A–C
 
 - **Obsidian** (desktop + mobile).
 - **Dropbox** (the sync relay) — desktop + mobile apps.
-- `git` + a **private** GitHub repo for backup (this template is `your-org/JDAK-vault`).
+- `git` + the **GitHub CLI** (`gh`, signed in) — it creates your private repo from the template in Part B.
 - `rclone` (`~/.local/bin/rclone`) with a `dropbox` remote.
 - **Python 3** (stdlib only — no pip packages needed).
 - An agent (OpenClaw) with a workspace and a `skills/` dir.
@@ -32,27 +32,53 @@ wire it to an agent (OpenClaw, Hermes, …). Two audiences: **the human** (A–C
 
 1. Install **Obsidian** on desktop and mobile.
 2. Install the **Dropbox** app (desktop + mobile); sign in.
-3. Create an **empty private GitHub repo** for the vault. Have its SSH URL ready.
+3. Have the **GitHub CLI** (`gh`) installed and signed in (`gh auth login`) — it creates the private
+   repository for you in Part B, so you do not make one by hand.
 4. Note the **Dropbox app folder** the vault lives in — this stack uses
    `Dropbox:Apps/remotely-save/jdak-stack`.
 
-## Part B · Get the vault in place
+## Part B · Get the vault in place — the template *is* the installer
+
+One command does acquisition: it creates **your own private repo** from the template and clones it, with
+`origin` already pointing at your repository.
 
 ```bash
 export WS="$HOME/.openclaw/workspace"
 export VAULT="$WS/Vault"
-git clone <JDAK-template-repo-url> "$VAULT"
+mkdir -p "$WS" && cd "$WS"
+
+gh repo create my-jdak --template your-org/jdak-template --private --clone
+mv my-jdak "$VAULT"
 cd "$VAULT"
-git remote rename origin template
-git remote add origin git@github.com:<you>/<your-vault>.git
-git push -u origin main
-git status                                                   # clean
+git status                                                   # clean, one commit
 ```
 
-If you used GitHub's **Use this template** button to create a populated private repository instead,
-clone that repository directly and skip the remote rename/add/push commands.
+GitHub's template flow gives this a property a plain `clone` does not: the new repository starts with **one
+independent commit** — the template's files and folder structure, without JDAK's development history. That
+is the separation this stack wants: **acquisition** is the `gh` command above, **machine setup** is the
+check-first bootstrap in Parts C–D, which runs from files you can now read and rerun.
+
+**Fallbacks** (no `gh`, or you prefer the browser):
+
+- **Use this template** on the repo page → creates *your* private repo with the single-commit history, then
+  `git clone git@github.com:<you>/<your-repo>.git "$VAULT"`. Nothing else to fix up.
+- **Plain clone** of the template — you inherit JDAK's history, so re-point the remotes:
+  ```bash
+  git clone https://github.com/your-org/jdak-template.git "$VAULT"
+  cd "$VAULT"
+  git remote rename origin template
+  git remote add origin git@github.com:<you>/<your-vault>.git
+  git push -u origin main
+  ```
+
+Never `curl | bash` an installer for this. The acquisition step is a supported GitHub command, and every
+setup script it leads to is a file in the repo you now own.
 
 ## Part C · Sync (vault ↔ Dropbox ↔ Obsidian) — the real scripts
+
+**This is the post-clone bootstrap.** Every step below is a plain, rerunnable command — copy, install,
+verify — with nothing hidden behind a remote installer. Re-run any of it any time; it reports what it could
+not configure instead of failing silently.
 
 The sync is **four scripts + one unit**, all vendored in `bin/`:
 
