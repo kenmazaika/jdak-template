@@ -114,15 +114,16 @@ done
 for f in "$T"/*.md; do
   [ -f "$f" ] || continue
   has_outbox_twin "$f" && continue
-  st=$(grep -m1 '^status:' "$f" 2>/dev/null | sed 's/^status:[[:space:]]*//; s/[[:space:]]*$//')
-  [ "$st" = "done" ] && continue
 
   # SELF-CLOSE: a ticked box under a close-intent heading means "move to outbox".
+  # `status: read` and a previously terminal `status: done` are also repaired here.
   # Deterministic, no model call (bin/inbox-close-request.sh). Handled tickets are
   # moved local+upstream here and never emitted, so they cost nothing.
   if [ -x "$SCRIPT_DIR/inbox-close-request.sh" ] && [ "${INBOX_AUTOCLOSE:-1}" != "0" ]; then
     bash "$SCRIPT_DIR/inbox-close-request.sh" "$f" >/dev/null 2>&1 && continue
   fi
+  st=$(grep -m1 '^status:' "$f" 2>/dev/null | sed 's/^status:[[:space:]]*//; s/[[:space:]]*$//')
+  [ "$st" = "done" ] && continue
   mtime=$(stat -c %Y "$f" 2>/dev/null || echo 0)
   age=$(( NOW - mtime ))
 

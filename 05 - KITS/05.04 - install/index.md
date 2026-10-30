@@ -205,7 +205,9 @@ shelf; it does not decide what ships. Skills marked `base: false` stay in the in
 mkdir -p "$WS/skills"
 while IFS= read -r -d '' skill_file; do
   skill_dir=${skill_file%/SKILL.md}
-  ln -sfn "$skill_dir" "$WS/skills/${skill_dir##*/}"
+  skill_name=${skill_dir##*/}
+  skill_name=${skill_name#* - }       # strip an optional Johnny Decimal prefix
+  ln -sfn "$skill_dir" "$WS/skills/$skill_name"
 done < <(grep -rlZx --include=SKILL.md 'base: true' "$VAULT/07 - SKILLS")
 
 find "$WS/skills" -mindepth 1 -maxdepth 1 -type l -printf '%f -> %l\n' | sort
@@ -228,7 +230,7 @@ Wire the sending mailbox via `himalaya`. Gmail/Workspace needs a 16-char **App P
 cd "$VAULT" && git status                     # clean
 $WS/bin/vault-sync.sh && echo ok              # bisync exit 0
 systemctl --user is-active vault-sync-watch   # active
-ls -l "$WS/skills/checkbox-runner"            # symlink resolves
+test -L "$WS/skills/checkbox-runner" && test -e "$WS/skills/checkbox-runner/SKILL.md"
 ```
 
 - Ask the agent to **read** a vault file and **write** a test note.

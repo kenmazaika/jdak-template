@@ -8,7 +8,8 @@
 #
 # RULE (deterministic, no model call)
 #   Close when a CHECKED box sits under a heading that means "close" — or when the
-#   checked box's own text says it. Matching is case-insensitive over:
+#   checked box's own text says it. A terminal frontmatter state (`status: read` or
+#   `status: done`) is also a close request. Matching is case-insensitive over:
 #     close · outbox · archive · done · mark as read
 #   The heading list is overridable: INBOX_CLOSE_HEADINGS='close|outbox|archive'
 #   (a value set to `0` disables the whole feature).
@@ -56,11 +57,14 @@ esac
 mtime=$(stat -c %Y "$f" 2>/dev/null || echo 0)
 [ $(( $(date +%s) - mtime )) -lt "$GRACE" ] && exit 1
 
-# Detection: does a checked box live under a close-intent heading (or say it itself)?
+# Detection: is this terminal, or does a checked box live under a close-intent heading
+# (or say it itself)?
 python3 - "$f" "$PATTERN" <<'PY'
 import re,sys
 path,pat = sys.argv[1], sys.argv[2]
 raw = open(path, encoding="utf-8", errors="replace").read().splitlines()
+if any(re.match(r"^status:\s*(?:read|done)\s*$", line, re.I) for line in raw):
+    sys.exit(0)
 rx = re.compile(pat, re.I)
 heading = ""
 heading_hits = False
