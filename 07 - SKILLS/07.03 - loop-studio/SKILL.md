@@ -37,7 +37,7 @@ Optional: cadence · approval on/off · audience. Ask **only** if a key input is
 2. **`02-design.md`** — fetch/where · **value gate** (rubric + threshold) · run shape (batons) · routing · approval · parameters.
 3. **`03-scaffold.md`** — create the loop folder: `LOOP.md` · `prompt.md` · `runs/` · `ledger.md` · `feedback.md`.
 4. **`04-skill.md`** — add the **generic** executor skill in `07 - SKILLS/` (symlink into the live skills dir) or point at an existing one.
-5. **`05-wire.md`** — the inbox `## Your action` block (approve / deny / deny+reason — per `05.10`) + registry rows (`06 - LOOPS/README.md`, `BALLS.md`).
+5. **`05-wire.md`** — the inbox `## Your action` block (approve / deny / deny+reason — per `05 - KITS/05.09 - inbox-message-playbook.md`) + registry rows (`06 - LOOPS/README.md`, `BALLS.md`).
 6. **`06-verify.md`** — a dry-run that emits a baton without erroring.
 7. Commit + sync + log.
 
