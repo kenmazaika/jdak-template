@@ -1,6 +1,6 @@
 # Nested git repos / scratch checkouts that must not be added to the vault.
-# The agent-run-cost-review pipeline uses a clean-room workspace clone with its own
-# (empty) .git; git refuses to `add -A` it ("does not have a commit checked out").
+# A clean-room checkout can contain an uninitialized .git directory; git refuses
+# to `add -A` it ("does not have a commit checked out").
 **/cleanroom/
 
 # Python bytecode caches
