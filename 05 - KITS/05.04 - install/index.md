@@ -120,7 +120,9 @@ $WS/bin/vault-sync.sh            # first run may need: rclone bisync … --resyn
 **4. Schedule (backstop) + event-driven watcher:**
 ```bash
 # backstop: every 15 min
-*/15 * * * * $WS/bin/vault-sync.sh >/dev/null 2>&1
+(crontab -l 2>/dev/null || true; printf '*/15 * * * * %s/bin/vault-sync.sh >/dev/null 2>&1\n' "$WS") \
+  | awk '!seen[$0]++' | crontab -
+crontab -l
 
 # event-driven (recommended): user systemd unit installed in step 2
 systemctl --user daemon-reload && systemctl --user enable --now vault-sync-watch.service
