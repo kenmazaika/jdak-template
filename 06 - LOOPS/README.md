@@ -82,6 +82,8 @@ is generic. The **checked box is the owner's approval** — the sweep acts on it
 | `06.07 - forge-draft` | Turn a **locked** idea (from `06.05`) into a forged draft against a **written 5-check rubric** — idea gate → deterministic forge (fresh adversarial critic → bounded revise → honest block) → verdict gate | on-request (ticket / cron) | `08 - PRODUCTION/drafts/` (the draft) + `06.07/runs/` |
 | `06.08 - jdak-template-pr` | Find ONE gap between the personal JDAK vault and the open-source template, then research → implement → validate → open a PR (three categories: system extraction · install & hooks · open-source readiness) | manual | `your-org/jdak-template` (PR) + inbox |
 | `06.09 - interactive-ticket` | Carry an idea from the inbox to a staged draft through a ticket conversation: intake → backbone/receipt → spine → draft → cut → SEO, one artifact per stage | manual / on ticket tick | ticket turns + `09.07` backing artifacts |
+| `06.10 - engineering-blog-improvement` | Audit one existing-site category, propose one bounded high-leverage improvement, then hand it off for implementation or rejection | daily · 07:30 PT | `04.08 - blog-content/improvement-opportunities.md` + inbox |
+| `06.11 - blog-signal-review` | Capture comparable GA4 + GSC receipts, update falsifiable blog-growth claims, and surface at most one evidence-backed proposal | weekly · Fri 01:00 PT | `06.11/snapshots/` + `claims.md` + inbox only when earned |
 
 **Building a new loop?** Use **Loop Studio** (`05 - KITS/05.01 - macros/loop-studio.md` · macro `05 - KITS/05.01 - macros/loop-studio.md`) — it scaffolds a loop from a plain-text brief.
 

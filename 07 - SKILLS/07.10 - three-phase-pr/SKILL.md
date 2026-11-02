@@ -118,26 +118,33 @@ revert the source, and do not hand-edit generated output.
    criterion, and the evidence. Do not open a PR.
 6. If it passes, push the branch and open the PR:
    - **Title:** a plain, descriptive summary — what changed, not why it matters.
+   - **Loop-specific PR guide:** if the invoking loop names a PR-description guide, read and follow it
+     before drafting. The loop-specific guide owns the audience and voice; this generic skill provides
+     the default only.
    - **Body:** use this exact three-part shape. It must be skimmable **without opening the code**:
 
      ```markdown
-     ## Problem solving
-     One short paragraph, plain language: what was broken or missing, and why it mattered.
+     ## What problem does this fix?
+     Explain it as you would to the project owner in chat: what the user-facing feature or setup step
+     is for, what a person expected to happen, what actually happened, and the practical consequence.
+     Avoid implementation terms until the reader needs them. Write for someone who has not opened the diff.
 
-     ## What I specifically did
-     - 3–5 bullets, one concrete change each, in reading order.
-     - Name a file only when it helps the reader find the change.
-     - No background essay; no restating the title.
+     ## What changes?
+     Explain how this PR fixes the issue in the same ordinary language. Use 2–4 concrete bullets when
+     useful. State what will happen differently for the user after the change. Name a file only when it
+     helps the reader find the change. No background essay or restatement of the title.
 
-     ## Verified
-     One line or a few bullets: the command(s) run and the result.
+     ## How was it checked?
+     One short sentence or a few bullets: what was checked and the result. Prefer the observable outcome
+     over a bare list of commands.
 
      Created by Felix 👾
      ```
 
-   - Write like a normal engineer handing work to a teammate — not a launch post. No emoji headers,
-     no "comprehensive", no filler. If a reader has to open the diff to understand the *what* or the
-     *why*, the body is not done.
+   - Write like a helpful teammate explaining a change to the owner — not a launch post or an implementation
+     log. No emoji headers, no "comprehensive", no filler. The first two sections must explain the change
+     in everyday terms; if a reader has to open the diff to understand the *what* or the *why*, the body is
+     not done.
    - Target the loop's default branch. Never merge.
 7. Write `03-validation.md`: verdict, criteria table, commands + results, scope repair (if any), PR URL.
 8. Append a `ledger.md` row: date · category · idea · PR · verdict.

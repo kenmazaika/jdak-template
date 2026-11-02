@@ -36,3 +36,21 @@ _2026-10-19 · cron/watch rule (accepted from `06.06` P1)._
 - Escalating is a route, not a fix: the handoff still names one concrete change.
 
 <!-- add rules below -->
+
+### R5 · Setup guides use the how-to register
+_2026-10-26 · voice rule (accepted from `06.06` P1 — **trial**, review after the next setup guide)._
+- Headline **names the thing**, never the sell. The `description`/subtitle may sell; the opening paragraph may
+  say why it matters.
+- Problem + concept in the **first half**, numbered steps in the **bottom half**. No clickbait framing.
+- Scope: `your-engineering-blog` setup guides only. Everything else keeps its own mode.
+
+### R6 · Don't re-propose a spent shape
+_2026-10-26 · loop rule (accepted from `06.06` P2)._
+- `06.05 - blog-idea` will not propose **the "add lines to your prompt / write an artifact first" device** as
+  *the change* — nor a benchmark for benchmarks' sake, nor a new per-run ceremony.
+- Return condition: the device comes back once a **non-device** idea ships.
+
+### R7 · Lede first — no TL;DR block, anywhere
+_2026-10-26 · voice rule (finishes the 2026-10-14 accept; `06.06` P3)._
+- No TL;DR / summary block on any surface. Open on the **lede** and put the payload inside the first screen.
+- `description` = the one-line promise, lede = the concrete scene; if one restates the other, reject.
