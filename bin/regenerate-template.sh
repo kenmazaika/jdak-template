@@ -57,10 +57,12 @@ git rm -rq --ignore-unmatch . >/dev/null 2>&1 || true
 find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} + 2>/dev/null || true
 
 # 3) skeleton
+# Base shelves ship empty; `02 - AREAS/02.04 - daily-notes/` is a base path (TEMPLATE.md) that the
+# Daily Notes plugin is pointed at, so it must exist in a fresh fork even before the first note.
 mkdir -p "00 - INBOX/00.01 - handoffs" "00 - INBOX/00.02 - intake" "00 - INBOX/00.03 - tickets" \
-         "00 - INBOX/00.04 - outbox" "01 - PROJECTS" "02 - AREAS" "03 - PERMANENT" \
-         "04 - RESOURCES" "05 - KITS" "06 - LOOPS" "07 - SKILLS" "08 - PRODUCTION" \
-         "09 - FLEETING" "10 - ARCHIVE" "99 - META" bin/systemd
+         "00 - INBOX/00.04 - outbox" "01 - PROJECTS" "02 - AREAS" "02 - AREAS/02.04 - daily-notes" \
+         "03 - PERMANENT" "04 - RESOURCES" "05 - KITS" "06 - LOOPS" "07 - SKILLS" \
+         "08 - PRODUCTION" "09 - FLEETING" "10 - ARCHIVE" "99 - META" bin/systemd
 
 # 4) base files
 cp "$V/README.md" "$V/SCHEMA.md" "$V/TEMPLATE.md" "$V/CONTRIBUTING.md" .
@@ -72,6 +74,7 @@ cp "$V/00 - INBOX/README.md" "00 - INBOX/"
 cp "$V/00 - INBOX/00.02 - intake/README.md" "00 - INBOX/00.02 - intake/"
 cp "$V/00 - INBOX/00.03 - tickets/README.md" "00 - INBOX/00.03 - tickets/"
 : > "00 - INBOX/00.01 - handoffs/.gitkeep"; : > "00 - INBOX/00.04 - outbox/.gitkeep"
+: > "02 - AREAS/02.04 - daily-notes/.gitkeep"
 
 for d in "01 - PROJECTS" "02 - AREAS" "03 - PERMANENT" "04 - RESOURCES" "06 - LOOPS" \
          "08 - PRODUCTION" "09 - FLEETING" "10 - ARCHIVE" "99 - META"; do
