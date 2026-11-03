@@ -246,8 +246,9 @@ irreversible (deleting anything not obviously transient), or when **two items bo
 which replays the ticked payloads, logs, and files the card to `00.04`. Frontmatter stays inside the
 vocabularies above (`status: active`, `turn:`, `action: pending|done`) so it needs no new detection — the
 sweep already reads `action: pending` + a checked box. Emit one **only** for a genuine pick-from-a-set
-(2+ discrete options); everything else stays a handoff or a ticket. Doctrine:
-[[03 - PERMANENT/03.01 - concepts/inbox-decision-card|The Inbox Decision Card]].
+(2+ discrete options); everything else stays a handoff or a ticket. Shape and discussion rules:
+`05 - KITS/05.09 - inbox-message-playbook.md`; fill-in template:
+`05 - KITS/05.02 - templates/decision-card.md`.
 
 ### Ideas — expire unless attached
 `seed` ideas get a 30-day clock. Unattached seeds are archived by the monthly sweep. An

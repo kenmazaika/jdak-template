@@ -49,8 +49,9 @@ sweep, same claim → act → outbox lifecycle — only the **shape** differs: t
 paste-ready payloads* sit inline as checkboxes, so the owner picks without opening anything.
 
 Use one **only** when the decision is a genuine **pick-from-a-set: 2+ discrete options**. A yes/no, a
-single recommendation, or an open conversation stays a normal handoff (or a ticket). Doctrine:
-[[03 - PERMANENT/03.01 - concepts/inbox-decision-card|The Inbox Decision Card]].
+single recommendation, or an open conversation stays a normal handoff (or a ticket). The shape, the
+discussion rules, and a skeleton are in `05 - KITS/05.09 - inbox-message-playbook.md`; the fill-in
+template is `05 - KITS/05.02 - templates/decision-card.md`.
 
 ```markdown
 ## ✅ Options
