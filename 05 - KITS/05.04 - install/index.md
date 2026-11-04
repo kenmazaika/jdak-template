@@ -88,7 +88,7 @@ The sync is **four scripts + one unit**, all vendored in `bin/`:
 | `bin/rclone-vault.filters` | What syncs (md/txt/html/pdf/images/csv; excludes `.git`, `09 - FLEETING`, caches). |
 | `bin/vault-sync.sh` | Two-way `rclone bisync`, **preserve-both + 3-way agent merge** (never newer-wins). Git snapshot first. |
 | `bin/vault-conflict-merge.py` | 3-way merge on conflict; escalates ambiguity to `logs/vault-sync-alert.json`. |
-| `bin/vault-sync-watch.py` | **Event-driven watcher**: local mtime scan + Dropbox cursor poll → fires the sync on change. |
+| `bin/vault-sync-watch.py` | **Event-driven watcher**: local mtime scan + remote rclone listing → fires the sync on change. |
 | `bin/systemd/vault-sync-watch.service` | systemd **user** unit that keeps the watcher running (survives logout with Linger). |
 
 **1. rclone remote:**
@@ -108,6 +108,7 @@ install -m 0644 "$VAULT/bin/systemd/vault-sync-watch.service" "$HOME/.config/sys
 bash -n "$WS/bin/vault-sync.sh" "$WS/bin/vault-paths.sh"
 python3 -m py_compile "$WS/bin/vault-conflict-merge.py" "$WS/bin/vault-sync-watch.py"
 systemd-analyze --user verify "$HOME/.config/systemd/user/vault-sync-watch.service"
+"$WS/bin/vault-sync-watch.py" --selftest
 ```
 
 Set `JDAK_VAULT_ROOT` in `~/.openclaw/.env` if the vault is not at `$WS/Vault`.
@@ -128,8 +129,10 @@ crontab -l
 systemctl --user daemon-reload && systemctl --user enable --now vault-sync-watch.service
 loginctl enable-linger "$USER"     # keep it running after logout
 ```
-The watcher syncs **within seconds** of a change in either direction; the cron stays as a safety net.
-Tune: `WATCH_DEBOUNCE` (20s), `WATCH_MIN_INTERVAL` (120s), `WATCH_POLL` (5s), `WATCH_REMOTE_POLL` (30s).
+The watcher syncs **within seconds** of a change in either direction; the cron stays as a safety net. Remote
+polling reuses the rclone remote configured in step 1, so it needs no separate Dropbox app or token files.
+Tune: `WATCH_DEBOUNCE` (20s), `WATCH_MIN_INTERVAL` (120s), `WATCH_POLL` (5s), `WATCH_REMOTE_POLL` (30s),
+`JDAK_DROPBOX_DEST` (`dropbox:Apps/remotely-save/jdak-stack`), `RCLONE`, and `RCLONE_CONFIG`.
 Log: `$WS/logs/vault-sync-watch.log`. Kill a stuck rclone by PID (`pkill -x rclone`).
 
 **5. Obsidian — two community plugins (mobile *and* desktop):**
