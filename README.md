@@ -27,7 +27,7 @@ a set of rules, and a handful of hooks — that makes that practical for a real 
 
 ## Getting started (install in ~20 minutes)
 
-This repo **is** the template. The full step-by-step is [[05 - KITS/05.04 - install/index|Install JDAK]]; the
+This repo **is** the template. The full step-by-step is [Install JDAK](05%20-%20KITS/05.04%20-%20install/index.md); the
 short version:
 
 1. **Obsidian** (desktop + mobile) + **Dropbox** (desktop + mobile).
