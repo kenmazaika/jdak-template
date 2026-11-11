@@ -20,7 +20,7 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 [ -r "$SCRIPT_DIR/vault-paths.sh" ] && . "$SCRIPT_DIR/vault-paths.sh"
 
 RCLONE=${RCLONE:-$HOME/.local/bin/rclone}
-CFG=${CFG:-$HOME/.config/rclone/rclone.conf}
+CFG=${CFG:-${RCLONE_CONFIG:-$HOME/.config/rclone/rclone.conf}}
 WS=${WS:-${JDAK_WORKSPACE:-$HOME/.openclaw/workspace}}
 SRC=${SRC:-${JDAK_VAULT_ROOT:-$WS/Vault}}
 DST=${DST:-${JDAK_DROPBOX_DEST:-dropbox:Apps/remotely-save/jdak-stack}}
