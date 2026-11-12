@@ -64,7 +64,9 @@ Never silently start a new ball when a live one could fit, and never leave a wor
 
 ## Hard rules
 - **Symlink assets, never copy** — copying forks the source of truth.
-- **Log every change in all four files** (BALL, decisions, LINEAGE, commands.log) — not just the work.
+- **Log every routed write** in `<vault>/log.md`. Update `BALL.md` and `PROJECT.md` when their state
+  changes; update `decisions.md`, `LINEAGE.md`, or `commands.log` only when the work adds a decision,
+  lineage entry, or command. Never manufacture entries just to touch every state file.
 - **Scope:** work products only. Not `memory/` notes, config, or skills. Scratch files go in `tmp/`.
 - If the registry looks stale or a ball root has a `.pre-consolidation-archive-*` dir, flag it — don't
   create a duplicate ball to work around a registry problem.
