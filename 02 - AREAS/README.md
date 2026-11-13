@@ -38,6 +38,7 @@ in `04` is never mistaken for your own.
 | `02.02` | `goals/` | Standing goals and objectives. |
 | `02.03` | `voice-guide/` | The owner's writing voice + style rules. |
 | `02.04` | `daily-notes/` | The daily log (`YYYY-MM-DD.md`). |
+| `02.05` | `scenario-guides/` | Scenario-specific guidance, including clearly named PR guides. |
 
 ## Notes
 

@@ -1,7 +1,7 @@
 ---
 title: Production
 created: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-26
 type: schema
 kind: fact
 status: active
@@ -33,3 +33,16 @@ or archive.
 
 *(Restored to the top level 2026-10-14 — it had been nested under `09 - FLEETING/09.06`, leaving the
 top-level `08` slot empty.)*
+
+## Tombstones
+
+When triage moves a draft out to `10 - ARCHIVE`, leave a **one-line tombstone** here. Old links and old
+notes keep pointing at the draft's slug; without a tombstone they resolve to nothing and look like a
+missing file instead of a decision.
+
+Shape:
+
+- `<drafts/slug>` → **moved to `10 - ARCHIVE/<slug>/`** (`YYYY-MM-DD`, <why it went>): <age/state at the
+time>, <what superseded it, if anything>.
+
+Keep the list short — one line per move, pruned when the archive itself is pruned.
