@@ -168,7 +168,7 @@ for f in AGENTS.md SOUL.md IDENTITY.md USER.md MEMORY.md TOOLS.md; do
   ln -sfn "Vault/99 - META/$f" "$WS/$f"
 done
 ```
-Edit the vault copy; the symlink picks it up; it syncs to your phone. *(Already done in this instance.)*
+Edit the vault copy; the symlink picks it up; it syncs to your phone.
 
 ### D2 · `TOOLS.md` — your local cheat sheet
 
