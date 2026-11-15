@@ -49,14 +49,14 @@ empty) the instance.
    fallbacks.
 2. **Name and locate it.** Set `JDAK_VAULT_ROOT` and `JDAK_DROPBOX_DEST` in `bin/vault-paths.sh`, and,
    optionally, retitle `README.md`.
-3. **Empty the instance.** Clear `01 - PROJECTS/01.02 - qballs/*`, `03 - PERMANENT/*`, `04 - RESOURCES/*`,
+3. **Empty the instance.** Clear `01 - PROJECTS/NN.MM - slug/*`, `03 - PERMANENT/*`, `04 - RESOURCES/*`,
    the **personal** skills in `07 - SKILLS/*` (`base: false`; keep `base: true`), `08 - PRODUCTION/*`,
    `09 - FLEETING/*`, `10 - ARCHIVE/*`, and the state files in `99 - META/`. Reset `INBOX.md`, `BALLS.md`, `log.md`.
 4. **Wire Obsidian.** Point the *Templates* plugin at `05 - KITS/05.02 - templates`; the
    *Daily notes* plugin at `02 - AREAS/02.04 - daily-notes`, with the `daily-note` template.
 5. **Wire sync.** Follow `05 - KITS/05.04 - install/index.md` to configure rclone, install the sync
    runtime and watcher, and keep cron as a backstop. Point mobile *Remotely Save* at the same Dropbox folder.
-6. **Add your first project** (`01 - PROJECTS/01.02 - qballs/01.01 - <slug>/` from `project.md`) and
+6. **Add your first project** (`01 - PROJECTS/NN.MM - slug/` from `project.md`) and
    register it in `BALLS.md`.
 
 ## What NOT to strip
