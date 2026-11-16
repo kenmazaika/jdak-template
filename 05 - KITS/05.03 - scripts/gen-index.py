@@ -9,7 +9,6 @@ def fm_get(text, field):
 sections = {
     '02 - AREAS/02.02 - goals': '🎯 Goals',
     '03 - PERMANENT/03.01 - concepts': '📚 Concepts (permanent)',
-    '04 - RESOURCES/04.01 - references': '🔗 References (curated links)',
     '09 - FLEETING/09.02 - concepts': '🌅 Fleeting — concepts',
     '09 - FLEETING/09.03 - entities': '🏛️ Entities (fleeting)',
     '09 - FLEETING/09.04 - comparisons': '⚖️ Comparisons (fleeting)',
@@ -33,6 +32,19 @@ for folder, title in sections.items():
         meta = ' · '.join(x for x in [kind, status] if x)
         lines.append(f'- **[[{t}]]** — {first[:120]}{(" [" + meta + "]") if meta else ""}')
     lines.append('')
+
+# Resource shelves: one row per shelf, pointing at its folder INDEX.md.
+shelves = sorted(glob.glob('04 - RESOURCES/04.* - *'))
+if shelves:
+    lines.append(f'## 🔗 Resource shelves ({len(shelves)})\n')
+    for s in shelves:
+        name = os.path.basename(s).split(' - ', 1)[-1]
+        nfiles = len(glob.glob(f'{s}/**/*.md', recursive=True))
+        idx = os.path.join(s, 'INDEX.md')
+        label = f'[[{s}/INDEX|{name}]]' if os.path.exists(idx) else name
+        lines.append(f'- {label} — {nfiles} files')
+    lines.append('')
+
 lines.append('## 🛠️ Production\n')
 _roots = {
     'projects (01)': '01 - PROJECTS',

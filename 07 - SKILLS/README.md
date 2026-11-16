@@ -48,10 +48,12 @@ Everything else in this folder. Keep them here so the agent can use them; the bu
 1. Create `<slug>/SKILL.md` (numbered if it belongs on a shelf; unnumbered if it is personal).
 2. Put `base: true` in the frontmatter **only** if a different owner could use it unchanged.
 3. If it ships, remove owner names, private URLs, local paths, and secrets — or leave `base: false`.
-4. Symlink it into the agent's live skills dir; this folder is the source of truth.
+4. Register this folder in `skills.load.extraDirs`; **never** symlink individual skill folders into the
+   live skills dir (the loader skips non-directory entries).
 
 ## Rules
 
 - **One skill, one job.** The loop holds the parameters; the skill holds the procedure.
-- **Vendor, don't copy.** Symlink from the live skills dir back to this folder.
+- **Vendor, don't copy.** Register this folder via `skills.load.extraDirs`; never symlink individual
+  skill folders into the live skills dir.
 - **`base: false` is normal.** Most skills are personal. The template is not a dump of one person's setup.

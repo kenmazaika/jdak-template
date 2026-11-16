@@ -7,7 +7,7 @@ base: true
 # project-boot
 
 ## When to use
-A new thread about an existing project, or when the owner says "boot X" / "what's left on X".
+A new thread about an existing project, or when the user says "boot X" / "what's left on X".
 
 ## Steps
 1. Read `BALLS.md` (workspace root) to find the project. If ambiguous, ask which one — one question, no preamble.
