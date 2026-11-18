@@ -12,7 +12,7 @@ working loop. Doctrine: `05 - KITS/05.01 - macros/loop-studio.md`. The phrase is
 
 ## When to use
 
-- the owner says **"Loop Studio"**, "build a loop", "new loop <topic>", or describes a recurring job to wire.
+- The user says **"Loop Studio"**, "build a loop", "new loop <topic>", or describes a recurring job to wire.
 
 ## What it assembles (the mechanisms already exist)
 
@@ -36,7 +36,7 @@ Optional: cadence · approval on/off · audience. Ask **only** if a key input is
 1. **`01-brief.md`** — restate the brief + the driving question.
 2. **`02-design.md`** — fetch/where · **value gate** (rubric + threshold) · run shape (batons) · routing · approval · parameters.
 3. **`03-scaffold.md`** — create the loop folder: `LOOP.md` · `prompt.md` · `runs/` · `ledger.md` · `feedback.md`.
-4. **`04-skill.md`** — add the **generic** executor skill in `07 - SKILLS/` (symlink into the live skills dir) or point at an existing one.
+4. **`04-skill.md`** — add the **generic** executor skill in `07 - SKILLS/` (registered via `skills.load.extraDirs`, never symlinked) or point at an existing one.
 5. **`05-wire.md`** — the inbox `## Your action` block (approve / deny / deny+reason — per `05 - KITS/05.09 - inbox-message-playbook.md`) + registry rows (`06 - LOOPS/README.md`, `BALLS.md`).
 6. **`06-verify.md`** — a dry-run that emits a baton without erroring.
 7. Commit + sync + log.

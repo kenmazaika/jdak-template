@@ -165,7 +165,7 @@ The vault is the **source of truth**, so the agent's instruction files live in *
 mkdir -p "$VAULT/99 - META"
 mv "$WS"/{AGENTS.md,SOUL.md,IDENTITY.md,USER.md,MEMORY.md,TOOLS.md} "$VAULT/99 - META/" 2>/dev/null || true
 for f in AGENTS.md SOUL.md IDENTITY.md USER.md MEMORY.md TOOLS.md; do
-  ln -sfn "Vault/99 - META/$f" "$WS/$f"
+  ln -sfn "$VAULT/99 - META/$f" "$WS/$f"
 done
 ```
 Edit the vault copy; the symlink picks it up; it syncs to your phone.
@@ -179,7 +179,7 @@ things up:
 2. **Secrets pointers** — one line per service: *which file* holds its key (`secrets/airtable.key`), never
    the value.
 3. **MCP servers** — the names registered in `openclaw.json`.
-4. **Skills** — which are symlinked, and from where.
+4. **Skills** — the `skills.load.extraDirs` root(s), and which skills are real directories in `$WS/skills`.
 5. **Machine specifics** — SSH hosts, device names, TTS voice, browser/CDP notes.
 6. **Conventions** — voice/sync rules you want the agent to remember.
 
@@ -201,22 +201,30 @@ Add each under `mcp.servers` (key in `headers`, never in the repo):
 
 One JSON/key file per service, `chmod 600`. Record a **pointer list** in `TOOLS.md` — never the values.
 
-### D5 · Skills → vendor + symlink
+### D5 · Skills → vendor + register the root
 
 The vault ships its generic management kit as skills marked `base: true`. Numbering organizes the
 shelf; it does not decide what ships. Skills marked `base: false` stay in the instance.
 
-```bash
-mkdir -p "$WS/skills"
-while IFS= read -r -d '' skill_file; do
-  skill_dir=${skill_file%/SKILL.md}
-  skill_name=${skill_dir##*/}
-  skill_name=${skill_name#* - }       # strip an optional Johnny Decimal prefix
-  ln -sfn "$skill_dir" "$WS/skills/$skill_name"
-done < <(grep -rlZx --include=SKILL.md 'base: true' "$VAULT/07 - SKILLS")
+**Do not symlink individual skill folders into `$WS/skills`.** The loader enumerates that directory with
+`readdir(..., { withFileTypes: true })` and skips non-directory entries, so a symlinked folder is invisible
+to the catalog — `openclaw skills info <name>` returns `Skill "<name>" not found` while the folder looks
+installed on disk. Register the vault root once instead:
 
-find "$WS/skills" -mindepth 1 -maxdepth 1 -type l -printf '%f -> %l\n' | sort
+```bash
+openclaw config set skills.load.extraDirs \
+  "[\"$VAULT/07 - SKILLS\"]" --strict-json
 ```
+
+`extraDirs` is scanned at **lowest precedence** — a same-name real directory in `$WS/skills` still wins.
+No gateway restart is needed; new sessions pick it up. Verify:
+
+```bash
+openclaw skills list | head -1
+openclaw skills info <skill-name>
+```
+
+This is the only skills wiring step. Real directories placed in `$WS/skills` continue to work.
 
 ### D6 · Loops + schedulers
 
@@ -235,7 +243,7 @@ Wire the sending mailbox via `himalaya`. Gmail/Workspace needs a 16-char **App P
 cd "$VAULT" && git status                     # clean
 $WS/bin/vault-sync.sh && echo ok              # bisync exit 0
 systemctl --user is-active vault-sync-watch   # active
-test -L "$WS/skills/checkbox-runner" && test -e "$WS/skills/checkbox-runner/SKILL.md"
+openclaw skills info checkbox-runner     # must report Ready, not "not found"
 ```
 
 - Ask the agent to **read** a vault file and **write** a test note.
