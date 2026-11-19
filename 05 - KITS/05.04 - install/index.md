@@ -121,7 +121,7 @@ $WS/bin/vault-sync.sh            # first run may need: rclone bisync … --resyn
 **4. Schedule (backstop) + event-driven watcher:**
 ```bash
 # backstop: every 15 min
-(crontab -l 2>/dev/null || true; printf '*/15 * * * * %s/bin/vault-sync.sh >/dev/null 2>&1\n' "$WS") \
+(crontab -l 2>/dev/null || true; printf '*/15 * * * * [ ! -f "$HOME/.openclaw/.env" ] || { set -a; . "$HOME/.openclaw/.env"; set +a; }; %s/bin/vault-sync.sh >/dev/null 2>&1\n' "$WS") \
   | awk '!seen[$0]++' | crontab -
 crontab -l
 
