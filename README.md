@@ -31,7 +31,7 @@ This repo **is** the template. The full step-by-step is [Install JDAK](05%20-%20
 short version:
 
 1. **Obsidian** (desktop + mobile) + **Dropbox** (desktop + mobile).
-2. **Clone/fork** the vault to `$WS/Vault`; connect a **private GitHub repo**.
+2. **Clone/fork** the vault to `$WS/Vault` (`$WS` is the agent workspace, usually `~/.openclaw/workspace`); connect a **private GitHub repo**.
 3. **Wire the sync** — `bin/vault-sync.sh` (two-way `rclone bisync`, preserve-both) plus the
    **event-driven watcher** `bin/vault-sync-watch.py` + its systemd *user* unit; keep a 15-min cron as the
    backstop. Edit one line in `bin/vault-paths.sh` when the vault moves.
