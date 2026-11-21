@@ -40,8 +40,8 @@ The mechanisms already exist in the vault — Loop Studio just **assembles** the
 2. Design: fetch/where · **value gate** (rubric + threshold) · run shape (batons) · routing · approval ·
    parameters → `02-design.md`.
 3. Scaffold `06 - LOOPS/NN.MM - <slug>/`: `LOOP.md` · `prompt.md` · `runs/` · `ledger.md` · `feedback.md`.
-4. Add the **generic executor skill** in `07 - SKILLS/` (symlink into the live skills dir) — or point at
-   an existing one. Keep it generic; the levers stay in `LOOP.md`.
+4. Add the **generic executor skill** in `07 - SKILLS/` (registered via `skills.load.extraDirs`, never
+   symlinked) — or point at an existing one. Keep it generic; the levers stay in `LOOP.md`.
 5. **Wire the inbox**: an `## Your action` block (approve / deny / deny+reason — per `05.07`).
 6. Register: `06 - LOOPS/README.md` table + `BALLS.md`.
 7. **Verify**: a dry-run that emits a baton without error.
