@@ -38,7 +38,8 @@ short version:
 4. **Obsidian plugins** — **Remotely Save** (Dropbox → `Apps/remotely-save/jdak-stack`) and **Templater**
    (*Folder Templates*: `00 - INBOX/00.02 - intake` → `05 - KITS/05.02 - templates/intake.md`).
 5. **Vendor the agent** — `AGENTS/SOUL/IDENTITY/USER/MEMORY/TOOLS.md` live in **`99 - META/`** and are
-   symlinked into the workspace; register MCP servers + secrets; symlink `07 - SKILLS/*` into `skills/`.
+   symlinked into the workspace; register MCP servers + secrets; register `07 - SKILLS` through
+   `skills.load.extraDirs`.
 6. **Verify** — `vault-sync.sh` exits 0, the watcher is active, and a test note reaches your phone.
 
 > **Why `99 - META`:** the vault is the source of truth. The agent's instruction files, the `base: true`
