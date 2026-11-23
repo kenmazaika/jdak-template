@@ -68,7 +68,46 @@ mkdir -p "00 - INBOX/00.01 - handoffs" "00 - INBOX/00.02 - intake" "00 - INBOX/0
 cp "$V/README.md" "$V/SCHEMA.md" "$V/TEMPLATE.md" "$V/CONTRIBUTING.md" .
 cp "$V/.gitignore" . 2>/dev/null || true
 git show "origin/$BRANCH:LICENSE" > LICENSE 2>/dev/null || true
-: > BALLS.md; : > INBOX.md; : > index.md; : > log.md
+
+# Root state files ship with their format, not empty. A fresh fork's first agent run needs a shape to
+# append to: five shipped docs and two shipped skills describe these files (SCHEMA.md §2, TEMPLATE.md
+# "keep the format", the qball-router and project-status skills) but never show the shape. Content is
+# still instance data — the stubs carry only a purpose line and the format, never a sample row.
+cat > BALLS.md <<'MD'
+# BALLS — project registry
+
+One line per project, newest activity first: where it lives, its status, and the next action.
+Read this first for "what work is open?"; the folder format is in `05 - KITS/05.06 - qball.md`.
+
+| # | Project | Status | Next action |
+|---|---|---|---|
+MD
+
+cat > INBOX.md <<'MD'
+# INBOX
+
+The agent → owner handoff board: one line per open item, newest first. The cards live in `00 - INBOX/`
+and this file indexes them; message shape is in `05 - KITS/05.09 - inbox-message-playbook.md`.
+
+```text
+- `YYYY-MM-DD` **What it is** · kind · [[00 - INBOX/00.01 - handoffs/<date>-<slug>|open]]
+```
+MD
+
+cat > log.md <<'MD'
+# Log
+
+Append-only record of vault actions.
+Format: `## [YYYY-MM-DD] action | subject`
+MD
+
+cat > index.md <<'MD'
+# JDAK Index
+
+> Auto-generated from frontmatter. Regenerate with `05 - KITS/05.03 - scripts/gen-index.py`.
+
+_No notes indexed yet — run the script above to build the catalog._
+MD
 
 cp "$V/00 - INBOX/README.md" "00 - INBOX/"
 cp "$V/00 - INBOX/00.02 - intake/README.md" "00 - INBOX/00.02 - intake/"
