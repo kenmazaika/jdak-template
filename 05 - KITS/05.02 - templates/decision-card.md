@@ -24,13 +24,17 @@ turn: you
 _Tick the ones you want — one or several. Ticking records the **choice**; **Execute** applies it. Each
 option carries its own paste-ready payload, so applying it is replay, not a re-derivation._
 
+<!-- agent: if this card proposes exactly one concrete piece of work, the first box is
+     `- [ ] **Accept and Move to work**` — it files the card's brief as an Orbit work item. If the card
+     offers a choice between options, keep them as A/B/C and do NOT add an Accept box. -->
+
 - [ ] **A. <label>** — <one line: what it does, where it lands>
       Target: [[<file it changes>|<label>]] · `<exact text / command / payload, inline>`
 - [ ] **B. <label>** — <one line>
       Target: [[<file it changes>|<label>]] · `<exact text / command / payload, inline>`
 - [ ] **C. <label>** — <one line>
       Target: [[<file it changes>|<label>]] · `<exact text / command / payload, inline>`
-- [ ] **Do none of these** — leave everything as-is; the card closes with no change.
+- [ ] **Mark as read (close it)** — leave everything as-is; the card closes with no change.
 - [ ] **✏️ Something else** — none of the above. Write it under this line, then tick this box.
       → <your instruction, in your words; I execute it as written>
 
