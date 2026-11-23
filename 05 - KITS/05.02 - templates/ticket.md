@@ -25,7 +25,7 @@ tags: [ticket]
 
 ## ▶ Control
 - [ ] **Execute the ticket** — run my next message: answer in a file, then reply here.
-- [ ] **Close the ticket** — done; move it to `00.04 - outbox/`.
+- [ ] **Mark as read (close it)** — done; move it to `00.04 - outbox/`.
 - [ ] **✏️ Something else** — neither run nor close: I say what I want in the ✍️ slot below, and that is the instruction.
 
 > The ✍️ slot **is** the free-form box (a ticket is a conversation, not a menu). Any option set a reply
