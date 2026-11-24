@@ -188,7 +188,7 @@ Add a tag here *first*, then use it. Groups: Engineering Management (`em`, `hiri
 
 **(a) Filing something new (the 90% case).**
 Put it in the existing item that fits. If it's a new project → next free `01.MM`.
-If it's a new capture/reference → land the raw in `04 - RESOURCES/04.01 - captures/`, then digest it into a domain shelf as a folder `<slug>/{source.md, analysis.md}` (see `04 - RESOURCES/README.md`).
+If it's a new capture/reference → land the raw in `04 - RESOURCES/04.01 - captures/`, then digest it into a domain shelf as a folder `<slug>/{source.md, shaped.md}` (see `04 - RESOURCES/README.md`).
 If it's a new distilled note → `03 - PERMANENT/03.01 - concepts/`. **Never** invent a
 top-level folder for one file.
 
