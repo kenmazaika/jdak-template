@@ -5,8 +5,9 @@ Wants=network-online.target
 
 [Service]
 Type=simple
+Environment=JDAK_WORKSPACE=%h/.openclaw/workspace
 EnvironmentFile=-%h/.openclaw/.env
-ExecStart=/usr/bin/python3 %h/.openclaw/workspace/bin/vault-sync-watch.py
+ExecStart=/usr/bin/python3 ${JDAK_WORKSPACE}/bin/vault-sync-watch.py
 Restart=always
 RestartSec=10
 Nice=10
