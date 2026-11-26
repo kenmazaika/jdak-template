@@ -1,7 +1,7 @@
 ---
 title: Loops
 created: 2026-10-12
-updated: 2026-10-19
+updated: 2026-11-26
 type: schema
 kind: fact
 status: active
@@ -71,22 +71,15 @@ is generic. The **checked box is the owner's approval** — the sweep acts on it
 
 ## The registry
 
+Keep this registry specific to the loops that exist in your fork. A compact entry is enough:
+
 | Loop | What it does | Cadence | Outputs to |
 |---|---|---|---|
-| `06.01 - distribution-research` | Scout new places to distribute the blog; promote one new channel | daily | `04.07 - distribution/` + inbox |
-| `06.02 - publish-blog` | Produce ONE new `your-publish-blog` post that teaches the owner something new; dedupe while a draft is pending; log accept/reject + reason | daily | `08 - PRODUCTION/drafts/` (**the draft**) + inbox |
-| `06.03 - research-engine` | Review the goals → frame **one** high-leverage question + hypothesis → research it | weekly / manual | `06.03/questions/` + a durable `03 - PERMANENT` page |
-| `06.04 - cold-email` | Source → enrich → Airtable → Instantly: the lead engine (declares the cold-email crons) | continuous | `01.35` + Airtable/Instantly |
-| `06.05 - blog-idea` | Queue **ONE** new engineering-blog idea (topic + angle + why) via SEO + agent-traffic + trend research; rubric-gated | daily | `04.08 - blog-content/idea-backlog.md` + inbox |
-| `06.06 - feedback-mining` | Batch the feedback corpus → propose the top ≤3 rule changes (collect, never auto-promote) | weekly | `05 - KITS/05.05 - feedback/` (+ `rules.md`) |
-| `06.07 - forge-draft` | Turn a **locked** idea (from `06.05`) into a forged draft against a **written 5-check rubric** — idea gate → deterministic forge (fresh adversarial critic → bounded revise → honest block) → verdict gate | on-request (ticket / cron) | `08 - PRODUCTION/drafts/` (the draft) + `06.07/runs/` |
-| `06.08 - jdak-template-pr` | Find ONE gap between the personal JDAK vault and the open-source template, then research → implement → validate → open a PR (three categories: system extraction · install & hooks · open-source readiness) | manual | `your-org/jdak-template` (PR) + inbox |
-| `06.09 - interactive-ticket` | Carry an idea from the inbox to a staged draft through a ticket conversation: intake → backbone/receipt → spine → draft → cut → SEO, one artifact per stage | manual / on ticket tick | ticket turns + `09.07` backing artifacts |
+| `NN.MM - example` | Describe one bounded recurring job | daily / weekly / manual | artifact path + optional inbox handoff |
 
 **Building a new loop?** Use **Loop Studio** (`05 - KITS/05.01 - macros/loop-studio.md` · macro `05 - KITS/05.01 - macros/loop-studio.md`) — it scaffolds a loop from a plain-text brief.
 
-### Loops whose core output lives in production
+### Loops whose core output lives elsewhere
 
-Some loops *produce* a production artifact rather than a note. `06.02 - publish-blog` is the first: the
-loop config lives here, but the **draft post is the artifact** and lives in `08 - PRODUCTION/drafts/`.
-The inbox only carries the nudge. This keeps "configuration" (here) separate from "the work" (production).
+Some loops produce an artifact rather than a note. Keep the loop configuration here, route the artifact
+to its owning shelf, and use the inbox only for the nudge. This separates configuration from the work.
